@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-zinc-950 text-zinc-900">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#18181b">
+  <title>Roll Egg's - Business Architect (100 Business & Scoring 30Q)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      background: radial-gradient(circle at center, #18181b 0%, #09090b 100%);
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 9999px; }
+
+    .aspect-9-16-container {
+      width: min(100vw, 440px);
+      height: min(100vh, 880px);
+    }
+
+    .card-sophisticated {
+      background: #ffffff;
+      border: 1px solid #e4e4e7;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+      border-radius: 1.25rem;
+    }
+
+    .modal-backdrop {
+      background-color: rgba(9, 9, 11, 0.75);
+      backdrop-filter: blur(4px);
+    }
+  </style>
+</head>
+<body class="h-full font-sans antialiased text-zinc-800 flex items-center justify-center p-0 md:p-4 overflow-hidden select-none">
+
+  <!-- 9:16 Frame Container -->
+  <div class="aspect-9-16-container bg-zinc-900 md:rounded-[2.5rem] shadow-2xl border-0 md:border-[6px] border-zinc-800/80 flex flex-col overflow-hidden relative w-full h-full">
+
+    <!-- Top Status Bar -->
+    <div class="w-full bg-zinc-900 pt-2.5 pb-1 px-6 flex justify-between items-center text-zinc-400 text-[11px] font-semibold border-b border-zinc-800/50 z-50 shrink-0">
+      <span id="top-clock">09:41</span>
+      <div class="w-16 h-3 bg-zinc-800 rounded-full mx-auto hidden sm:block"></div>
+      <div class="flex items-center space-x-1.5">
+        <i class="fa-solid fa-signal text-[9px]"></i>
+        <i class="fa-solid fa-wifi text-[9px]"></i>
+        <i class="fa-solid fa-battery-full text-xs"></i>
+      </div>
+    </div>
+
+    <!-- Header Bar -->
+    <header class="bg-zinc-900 px-4 py-2.5 text-white flex items-center justify-between border-b border-zinc-800/80 z-40 shrink-0">
+      <div class="flex items-center space-x-2.5 cursor-pointer" onclick="switchTab('accueil')">
+        <!-- SVG Logo Roll Egg's -->
+        <div class="w-8 h-8 rounded-lg bg-white p-0.5 flex items-center justify-center shadow-sm">
+          <svg viewBox="0 0 100 80" class="w-full h-full">
+            <path d="M 15 35 Q 35 75 70 35" fill="none" stroke="#111827" stroke-width="6" stroke-linecap="round" />
+            <path d="M 20 22 C 15 10 38 8 48 18 C 55 25 45 42 32 40 C 20 38 18 28 20 22 Z" fill="#FFFFFF" stroke="#111827" stroke-width="3"/>
+            <circle cx="33" cy="24" r="8" fill="#F97316"/>
+            <path d="M 42 28 C 38 15 62 12 72 22 C 80 30 70 48 55 45 C 42 42 40 32 42 28 Z" fill="#FFFFFF" stroke="#111827" stroke-width="3"/>
+            <circle cx="56" cy="28" r="8" fill="#F97316"/>
+          </svg>
+        </div>
+        <div>
+          <span class="font-extrabold text-xs tracking-widest text-zinc-100 block leading-none">ROLL EGG'S</span>
+          <span class="text-[9px] text-zinc-400 font-medium block leading-tight mt-0.5">100 IDEES & SCORING 30Q</span>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button onclick="switchTab('dashboard')" class="p-1.5 text-zinc-400 hover:text-white rounded-lg transition active:scale-95" title="Tableau de bord">
+          <i class="fa-solid fa-chart-line text-sm"></i>
+        </button>
+        <button onclick="switchTab('profil')" class="p-1.5 text-zinc-400 hover:text-white rounded-lg transition active:scale-95" title="Profil">
+          <i class="fa-solid fa-sliders text-sm"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto bg-zinc-50 relative p-4 space-y-4 pb-24">
+
+      <!-- TAB 1: ACCUEIL -->
+      <section id="tab-accueil" class="tab-content space-y-4">
+        <div class="card-sophisticated p-5 bg-gradient-to-br from-white to-zinc-50 space-y-4">
+          <div class="flex justify-between items-center">
+            <div class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-700 border border-zinc-200 text-[10px] font-extrabold tracking-wider uppercase">
+              <i class="fa-solid fa-database text-zinc-500"></i>
+              <span>100 Business Modèles Réels</span>
+            </div>
+            <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">v2.5 Full</span>
+          </div>
+          <h1 class="text-xl font-extrabold text-zinc-900 leading-tight tracking-tight">
+            Trouve ton Business idéal grâce à notre algorithme
+          </h1>
+          <p class="text-zinc-600 text-xs leading-relaxed">
+            Réponds aux 30 questions de ton profil pour obtenir un classement 100% déterministe parmi 100 opportunités réalistes et lance ton programme 30 jours.
+          </p>
+          <div class="pt-1 space-y-2">
+            <button onclick="switchTab('questionnaire')" class="w-full py-3 rounded-xl bg-zinc-900 active:bg-zinc-800 text-zinc-100 font-bold text-xs transition shadow-md flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+              <span>Lancer l'Évaluation Déterministe (30Q)</span>
+            </button>
+            <button onclick="switchTab('catalogue')" class="w-full py-2.5 rounded-xl bg-white active:bg-zinc-100 text-zinc-700 font-bold text-xs transition border border-zinc-200 flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-border-all text-zinc-400 text-xs"></i>
+              <span>Explorer les 100 Fiches Business</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <div class="card-sophisticated p-3.5 space-y-1 cursor-pointer" onclick="switchTab('catalogue')">
+            <span class="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Base Active</span>
+            <p class="text-xs font-bold text-zinc-800" id="home-count-biz">100 Idées Réelles</p>
+            <p class="text-[10px] text-zinc-500">10 Catégories clés</p>
+          </div>
+          <div class="card-sophisticated p-3.5 space-y-1 cursor-pointer" onclick="switchTab('questionnaire')">
+            <span class="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Scoring</span>
+            <p class="text-xs font-bold text-zinc-800">100% Sans IA</p>
+            <p class="text-[10px] text-zinc-500">Algorithme strict</p>
+          </div>
+        </div>
+
+        <!-- Quick Categories Preview -->
+        <div class="card-sophisticated p-4 space-y-3">
+          <h3 class="text-xs font-bold text-zinc-900 flex justify-between items-center">
+            <span>Catégories en Vedette</span>
+            <span onclick="switchTab('catalogue')" class="text-[10px] text-zinc-500 hover:text-zinc-900 cursor-pointer">Voir tout &rarr;</span>
+          </h3>
+          <div class="grid grid-cols-2 gap-2 text-[10px]" id="home-category-tags">
+            <!-- Dynamically injected -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: QUESTIONNAIRE (30 QUESTIONS) -->
+      <section id="tab-questionnaire" class="tab-content hidden space-y-3">
+        <!-- Quiz Intro -->
+        <div id="quiz-intro" class="card-sophisticated p-5 text-center space-y-4">
+          <div class="w-12 h-12 bg-zinc-900 text-zinc-100 rounded-xl flex items-center justify-center mx-auto text-xl shadow">
+            <i class="fa-solid fa-clipboard-question"></i>
+          </div>
+          <div class="space-y-1">
+            <h2 class="text-base font-extrabold text-zinc-900">Évaluation Complète (30 Questions)</h2>
+            <p class="text-zinc-500 text-xs leading-relaxed">
+              Profil, compétences actuelles, budget de départ, disponibilité et préférences commerciales.
+            </p>
+          </div>
+          <button onclick="startQuiz()" class="w-full py-3 bg-zinc-900 active:bg-zinc-800 text-white font-bold rounded-xl transition shadow text-xs flex items-center justify-center space-x-2">
+            <span>Commencer le Questionnaire</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+
+        <!-- Quiz Main Interface -->
+        <div id="quiz-container" class="hidden space-y-3">
+          <div class="bg-white p-3 rounded-xl border border-zinc-200 shadow-sm space-y-1.5">
+            <div class="flex justify-between items-center text-[10px] font-bold text-zinc-500">
+              <span id="quiz-section-title" class="uppercase tracking-wider text-zinc-700">SECTION A</span>
+              <span id="quiz-progress-text">1 / 30</span>
+            </div>
+            <div class="w-full bg-zinc-100 h-1.5 rounded-full overflow-hidden border border-zinc-200/60">
+              <div id="quiz-progress-bar" class="bg-zinc-900 h-full w-[3.33%] transition-all duration-300"></div>
+            </div>
+          </div>
+
+          <div id="quiz-card" class="card-sophisticated p-4 space-y-4">
+            <div class="space-y-1">
+              <span id="q-number-tag" class="text-[9px] font-extrabold px-2 py-0.5 rounded bg-zinc-100 text-zinc-700 border border-zinc-200 inline-block">Q1</span>
+              <h3 id="q-title" class="text-xs font-bold text-zinc-900 leading-snug">...</h3>
+              <p id="q-subtext" class="text-[10px] text-zinc-400 font-medium"></p>
+            </div>
+
+            <div id="q-options-container" class="space-y-2 max-h-72 overflow-y-auto pr-1"></div>
+
+            <div class="flex justify-between items-center pt-2 border-t border-zinc-100">
+              <button id="q-prev-btn" onclick="prevQuestion()" class="px-3 py-2 rounded-lg border border-zinc-200 bg-white text-zinc-600 text-[11px] font-bold active:bg-zinc-50 transition disabled:opacity-30">
+                <i class="fa-solid fa-arrow-left mr-1"></i> Précédent
+              </button>
+              <button id="q-next-btn" onclick="nextQuestion()" class="px-4 py-2 rounded-lg bg-zinc-900 active:bg-zinc-800 text-white text-[11px] font-bold transition flex items-center shadow-sm">
+                <span>Suivant</span>
+                <i class="fa-solid fa-arrow-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quiz Outro -->
+        <div id="quiz-outro" class="hidden card-sophisticated p-5 text-center space-y-4">
+          <div class="w-12 h-12 bg-zinc-900 text-zinc-100 rounded-xl flex items-center justify-center mx-auto text-xl shadow">
+            <i class="fa-solid fa-check-double"></i>
+          </div>
+          <div class="space-y-1">
+            <h2 class="text-base font-bold text-zinc-900">Évaluation Renseignée !</h2>
+            <p class="text-zinc-500 text-xs">Tes 30 réponses ont été enregistrées avec succès.</p>
+          </div>
+          <button onclick="calculateAndShowResults()" class="w-full py-3 bg-zinc-900 active:bg-zinc-800 text-white font-bold rounded-xl transition shadow text-xs">
+            Calculer mes Recommandations Réelles
+          </button>
+        </div>
+      </section>
+
+      <!-- TAB 3: RESULTATS & RECOMMANDATIONS -->
+      <section id="tab-resultats" class="tab-content hidden space-y-3">
+        <div class="flex justify-between items-center border-b border-zinc-200 pb-2">
+          <div>
+            <span class="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Moteur Déterministe</span>
+            <h2 class="text-sm font-extrabold text-zinc-900">Top Modèles Recommandés</h2>
+          </div>
+          <button onclick="switchTab('questionnaire')" class="px-2.5 py-1 bg-white border border-zinc-200 text-[10px] font-bold text-zinc-700 rounded-lg active:bg-zinc-50">
+            Modifier réponses
+          </button>
+        </div>
+
+        <!-- Summary User Profile Pill -->
+        <div id="results-profile-summary" class="bg-zinc-100 p-2.5 rounded-xl border border-zinc-200 text-[10px] text-zinc-600 space-y-1">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div id="results-cards-container" class="space-y-3"></div>
+      </section>
+
+      <!-- TAB 4: CATALOGUE DES 100 BUSINESS -->
+      <section id="tab-catalogue" class="tab-content hidden space-y-3">
+        <div class="space-y-0.5 flex justify-between items-end">
+          <div>
+            <h2 class="text-sm font-extrabold text-zinc-900">Catalogue des Business</h2>
+            <p class="text-zinc-500 text-[10px]">100 opportunités modélisées et structurées.</p>
+          </div>
+          <span id="catalog-count-badge" class="bg-zinc-900 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">100 / 100</span>
+        </div>
+
+        <!-- Search & Advanced Filter Toggle -->
+        <div class="space-y-2">
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-zinc-400 text-xs"></i>
+            <input type="text" id="catalog-search" onkeyup="filterCatalog()" placeholder="Rechercher (ex: Canva, rédaction, SEO...)" class="w-full bg-white border border-zinc-200 rounded-xl pl-8 pr-3 py-2 text-xs text-zinc-800 focus:outline-none focus:border-zinc-900 shadow-sm">
+          </div>
+
+          <!-- Quick Filters Grid -->
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <select id="catalog-filter-cat" onchange="filterCatalog()" class="w-full bg-white border border-zinc-200 rounded-xl px-2 py-1.5 text-[11px] text-zinc-800 font-medium focus:outline-none">
+              <option value="all">Toutes les catégories (10)</option>
+              <option value="Marketing digital">Marketing digital (15)</option>
+              <option value="Rédaction & Contenu">Rédaction & Contenu (12)</option>
+              <option value="Design & Produits">Design & Produits (12)</option>
+              <option value="IA & Automatisation">IA & Automatisation (10)</option>
+              <option value="Services B2B">Services B2B (10)</option>
+              <option value="E-commerce & Revente">E-commerce & Revente (10)</option>
+              <option value="Services Locaux">Services Locaux (10)</option>
+              <option value="Éducation & Coaching">Éducation & Coaching (8)</option>
+              <option value="Sport & Lifestyle">Sport & Lifestyle (6)</option>
+              <option value="Web & Tech">Web & Tech (7)</option>
+            </select>
+
+            <select id="catalog-filter-budget" onchange="filterCatalog()" class="w-full bg-white border border-zinc-200 rounded-xl px-2 py-1.5 text-[11px] text-zinc-800 font-medium focus:outline-none">
+              <option value="all">Tous les budgets</option>
+              <option value="0">0 € uniquement</option>
+              <option value="20">Moins de 20 €</option>
+              <option value="50">Moins de 50 €</option>
+              <option value="100">Moins de 100 €</option>
+            </select>
+          </div>
+
+          <!-- Secondary Filters Row -->
+          <div class="flex items-center justify-between text-[10px] space-x-1.5 overflow-x-auto pb-1">
+            <button onclick="toggleFilterBadge('smartphone')" id="btn-filter-smartphone" class="px-2.5 py-1 bg-white border border-zinc-200 rounded-lg shrink-0 text-zinc-600 font-bold active:scale-95 transition">
+              <i class="fa-solid fa-mobile-screen mr-1"></i> Smartphone seul
+            </button>
+            <button onclick="toggleFilterBadge('facile')" id="btn-filter-facile" class="px-2.5 py-1 bg-white border border-zinc-200 rounded-lg shrink-0 text-zinc-600 font-bold active:scale-95 transition">
+              <i class="fa-solid fa-seedling mr-1"></i> Niveau Facile
+            </button>
+            <button onclick="toggleFilterBadge('favoris')" id="btn-filter-favoris" class="px-2.5 py-1 bg-white border border-zinc-200 rounded-lg shrink-0 text-zinc-600 font-bold active:scale-95 transition">
+              <i class="fa-solid fa-bookmark mr-1 text-amber-500"></i> Favoris (<span id="fav-count">0</span>)
+            </button>
+          </div>
+        </div>
+
+        <div id="catalog-grid" class="space-y-2.5 min-h-[300px]"></div>
+      </section>
+
+      <!-- TAB 5: CALENDRIER 30 JOURS PERSONNALISÉ -->
+      <section id="tab-calendrier" class="tab-content hidden space-y-3">
+        <div class="flex justify-between items-center border-b border-zinc-200 pb-2">
+          <div>
+            <span class="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Feuille de Route</span>
+            <h2 class="text-sm font-extrabold text-zinc-900" id="plan-selected-title">Programme 30 Jours</h2>
+          </div>
+          <div class="bg-zinc-900 text-white px-2.5 py-1 rounded-lg text-[10px] font-bold">
+            Avancement : <span id="calendar-progress-percent" class="text-emerald-400">0%</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between text-[11px] bg-white p-2 rounded-xl border border-zinc-200">
+          <span class="text-zinc-600 font-bold">Projet sélectionné :</span>
+          <span id="calendar-active-biz-name" class="font-extrabold text-zinc-900 truncate max-w-[200px]">Designer Canva Freelance</span>
+        </div>
+
+        <div class="space-y-2" id="calendar-days-container"></div>
+      </section>
+
+      <!-- TAB 6: DASHBOARD -->
+      <section id="tab-dashboard" class="tab-content hidden space-y-3">
+        <div class="space-y-0.5">
+          <h2 class="text-sm font-extrabold text-zinc-900">Tableau de Bord & Suivi CRM</h2>
+          <p class="text-zinc-500 text-[10px]">Statistiques d'exécution et gestion de tes prospects.</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div class="card-sophisticated p-3 space-y-1">
+            <span class="text-[9px] font-bold text-zinc-400 uppercase">Projet Actif</span>
+            <p class="text-xs font-bold text-zinc-800 truncate" id="dash-selected-biz">Non sélectionné</p>
+          </div>
+          <div class="card-sophisticated p-3 space-y-1">
+            <span class="text-[9px] font-bold text-zinc-400 uppercase">Tâches Validées</span>
+            <p class="text-xs font-bold text-zinc-800" id="dash-completed-tasks">0 / 30 Tâches</p>
+          </div>
+        </div>
+
+        <div class="card-sophisticated p-4 space-y-3">
+          <h3 class="text-xs font-extrabold text-zinc-900 flex justify-between items-center">
+            <span>Mini-CRM Prospects</span>
+            <button onclick="addNewProspectPrompt()" class="text-[10px] bg-zinc-900 text-white font-bold px-2 py-1 rounded-lg">
+              + Ajouter un prospect
+            </button>
+          </h3>
+
+          <div id="prospects-list-container" class="space-y-1.5 text-xs">
+            <p class="text-[10px] text-zinc-400 text-center py-2">Aucun prospect enregistré pour l'instant.</p>
+          </div>
+        </div>
+
+        <div class="card-sophisticated p-4 space-y-2">
+          <h3 class="text-xs font-bold text-zinc-900">Ventes & Revenus Réels</h3>
+          <p class="text-[10px] text-zinc-500">Saisis tes ventes réelles pour conserver un historique exact (aucun faux chiffre généré).</p>
+          <div class="flex space-x-2">
+            <input type="number" id="real-revenue-input" placeholder="Montant (€)" class="w-1/2 p-2 border border-zinc-200 rounded-lg text-xs">
+            <button onclick="addRealRevenue()" class="w-1/2 bg-zinc-900 text-white text-xs font-bold rounded-lg">Enregistrer Vente</button>
+          </div>
+          <div class="pt-2 flex justify-between items-center text-xs border-t border-zinc-100">
+            <span class="font-bold text-zinc-600">Total Ventes Confirmées :</span>
+            <span class="font-extrabold text-emerald-600 text-sm" id="total-revenue-display">0 €</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 7: PROFIL -->
+      <section id="tab-profil" class="tab-content hidden space-y-3">
+        <div class="space-y-0.5">
+          <h2 class="text-sm font-extrabold text-zinc-900">Profil & Données</h2>
+          <p class="text-zinc-500 text-[10px]">Gestion de l'application et sauvegardes locales.</p>
+        </div>
+
+        <div class="card-sophisticated p-4 space-y-3">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-zinc-900 text-white flex items-center justify-center font-bold text-sm">RE</div>
+            <div>
+              <h3 class="font-bold text-xs text-zinc-900">Utilisateur Roll Egg's</h3>
+              <p class="text-[10px] text-zinc-400">Base locale 100 Business complète</p>
+            </div>
+          </div>
+
+          <div class="border-t border-zinc-100 pt-3 space-y-2">
+            <button onclick="resetAppProgress()" class="w-full py-2.5 bg-red-50 text-red-700 font-bold text-xs rounded-xl hover:bg-red-100 border border-red-200 transition">
+              Réinitialiser toutes les données & réponses
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Modal Details Business -->
+    <div id="biz-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop">
+      <div class="bg-white rounded-2xl w-full max-w-sm max-h-[85vh] overflow-y-auto p-5 space-y-4 shadow-2xl relative border border-zinc-200">
+        <button onclick="closeBizModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-900 p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+
+        <div id="modal-content" class="space-y-3">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-zinc-200/80 z-40 px-2 py-2 flex justify-around items-center shrink-0">
+      <button onclick="switchTab('accueil')" class="nav-btn-mobile flex flex-col items-center text-zinc-900" data-tab="accueil">
+        <i class="fa-solid fa-house text-sm"></i>
+        <span class="text-[9px] font-bold mt-0.5">Accueil</span>
+      </button>
+      <button onclick="switchTab('questionnaire')" class="nav-btn-mobile flex flex-col items-center text-zinc-400" data-tab="questionnaire">
+        <i class="fa-solid fa-list-check text-sm"></i>
+        <span class="text-[9px] font-bold mt-0.5">Quiz (30Q)</span>
+      </button>
+      <button onclick="switchTab('resultats')" class="nav-btn-mobile flex flex-col items-center text-zinc-400" data-tab="resultats">
+        <i class="fa-solid fa-chart-pie text-sm"></i>
+        <span class="text-[9px] font-bold mt-0.5">Scores</span>
+      </button>
+      <button onclick="switchTab('catalogue')" class="nav-btn-mobile flex flex-col items-center text-zinc-400" data-tab="catalogue">
+        <i class="fa-solid fa-store text-sm"></i>
+        <span class="text-[9px] font-bold mt-0.5">100 Idées</span>
+      </button>
+      <button onclick="switchTab('calendrier')" class="nav-btn-mobile flex flex-col items-center text-zinc-400" data-tab="calendrier">
+        <i class="fa-solid fa-calendar text-sm"></i>
+        <span class="text-[9px] font-bold mt-0.5">Plan 30J</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <script>
+    // COMPLETE 30 QUESTIONS DATABASE
+    const fullQuestions = [
+      // SECTION A — PROFIL ET INTÉRÊTS
+      { section: "SECTION A — PROFIL ET INTÉRÊTS", num: 1, title: "Quel âge as-tu ?", sub: "Choix unique", type: "single", options: ["Moins de 16 ans", "16–17 ans", "18–20 ans", "21–25 ans", "Plus de 25 ans", "Je préfère ne pas répondre"] },
+      { section: "SECTION A — PROFIL ET INTÉRÊTS", num: 2, title: "Quelle est ta situation actuelle ?", sub: "Choix unique", type: "single", options: ["Collégien ou lycéen", "Étudiant", "Salarié", "En recherche d'emploi", "Déjà entrepreneur", "Autre situation"] },
+      { section: "SECTION A — PROFIL ET INTÉRÊTS", num: 3, title: "Quels sont tes principaux centres d'intérêt ?", sub: "Plusieurs réponses possibles", type: "multi", options: ["Marketing digital & réseaux sociaux", "Design & création graphique", "Rédaction & écriture", "Informatique & programmation", "Intelligence artificielle", "Vente & commerce", "Mode & vêtements", "Sport & bien-être", "Enseignement & coaching", "Services locaux & bricolage", "Organisation & gestion", "Je ne sais pas encore"] },
+      { section: "SECTION A — PROFIL ET INTÉRÊTS", num: 4, title: "Qu'est-ce qui te motive le plus à lancer un business ?", sub: "Choix unique", type: "single", options: ["Gagner mes premiers euros", "Devenir indépendant financièrement à long terme", "Apprendre à entreprendre", "Créer ma propre marque", "Développer un revenu complémentaire", "Transformer une passion en activité"] },
+      { section: "SECTION A — PROFIL ET INTÉRÊTS", num: 5, title: "Quel type d'activité t'attire le plus ?", sub: "Choix unique", type: "single", options: ["Créative", "Commerciale", "Technique", "Manuelle ou pratique", "Relationnelle ou éducative", "Peu importe, si le business est adapté à mon profil"] },
+
+      // SECTION B — COMPÉTENCES
+      { section: "SECTION B — COMPÉTENCES", num: 6, title: "Quelles compétences possèdes-tu déjà ?", sub: "Plusieurs réponses possibles", type: "multi", options: ["Création graphique sur Canva", "Gestion de réseaux sociaux", "Montage vidéo", "Rédaction web", "Vente et négociation", "Développement web", "Utilisation d'outils d'IA", "Organisation et gestion de projet", "Bricolage / Compétences manuelles", "Communication avec les clients", "Aucune compétence particulière pour le moment"] },
+      { section: "SECTION B — COMPÉTENCES", num: 7, title: "Quels outils sais-tu utiliser ?", sub: "Plusieurs réponses possibles", type: "multi", options: ["Canva", "CapCut ou outil de montage", "Instagram / TikTok", "Outils d'IA (ChatGPT, Midjourney...)", "Excel ou Google Sheets", "CMS (WordPress, Shopify...)", "Plateformes de vente (Vinted, Leboncoin...)", "Aucun de ceux-ci pour le moment"] },
+      { section: "SECTION B — COMPÉTENCES", num: 8, title: "Quel est ton niveau en informatique ?", sub: "Choix unique", type: "single", options: ["Débutant", "Intermédiaire", "Avancé"] },
+      { section: "SECTION B — COMPÉTENCES", num: 9, title: "As-tu déjà réalisé un projet ou vendu quelque chose ?", sub: "Choix unique", type: "single", options: ["Oui, j'ai déjà vendu plusieurs fois", "Oui, j'ai déjà réalisé un projet personnel", "J'ai essayé, mais sans résultat", "Non, jamais"] },
+      { section: "SECTION B — COMPÉTENCES", num: 10, title: "Quelle compétence aimerais-tu apprendre en priorité ?", sub: "Choix unique", type: "single", options: ["Trouver des clients et vendre", "Créer des visuels", "Créer du contenu vidéo", "Écrire des textes professionnels", "Utiliser l'IA et automatiser", "Créer des sites web", "Acheter et revendre", "Gérer une activité", "Je ne sais pas encore"] },
+
+      // SECTION C — TEMPS ET MODE DE VIE
+      { section: "SECTION C — TEMPS ET MODE DE VIE", num: 11, title: "Combien de temps peux-tu consacrer à ton business ?", sub: "Choix unique", type: "single", options: ["Moins de 30 minutes par jour", "30 minutes à 1 heure par jour", "1 à 2 heures par jour", "2 à 4 heures par jour", "Plus de 4 heures par jour"] },
+      { section: "SECTION C — TEMPS ET MODE DE VIE", num: 12, title: "Où préfères-tu travailler ?", sub: "Choix unique", type: "single", options: ["Entièrement en ligne", "Principalement en ligne", "Principalement en présentiel", "Peu importe"] },
+      { section: "SECTION C — TEMPS ET MODE DE VIE", num: 13, title: "Quel matériel possèdes-tu ?", sub: "Plusieurs réponses possibles", type: "multi", options: ["Smartphone", "Ordinateur", "Tablette", "Appareil photo / Matériel vidéo", "Équipement manuel ou outils", "Aucun matériel personnel fiable"] },
+      { section: "SECTION C — TEMPS ET MODE DE VIE", num: 14, title: "Avec qui préfères-tu travailler ?", sub: "Choix unique", type: "single", options: ["Principalement seul", "Avec des clients à distance", "Avec des clients en personne", "En équipe", "Peu importe"] },
+      { section: "SECTION C — TEMPS ET MODE DE VIE", num: 15, title: "Quel type d'activité préfères-tu ?", sub: "Choix unique", type: "single", options: ["Vendre des services à des entreprises", "Créer et vendre des produits numériques", "Acheter et revendre des produits", "Créer du contenu sur Internet", "Proposer des services locaux", "Créer des solutions techniques", "Enseigner ou accompagner des personnes", "Je ne sais pas encore"] },
+
+      // SECTION D — BUDGET ET OBJECTIFS
+      { section: "SECTION D — BUDGET ET OBJECTIFS", num: 16, title: "Quel budget peux-tu investir au départ ?", sub: "Choix unique", type: "single", options: ["0 €", "1 à 20 €", "21 à 50 €", "51 à 100 €", "Plus de 100 €"] },
+      { section: "SECTION D — BUDGET ET OBJECTIFS", num: 17, title: "Quel est ton objectif principal ?", sub: "Choix unique", type: "single", options: ["Obtenir mes premiers revenus le plus rapidement possible", "Construire une activité durable", "Apprendre des compétences utiles", "Développer une marque personnelle", "Créer une activité complémentaire", "Tester plusieurs idées avant de choisir"] },
+      { section: "SECTION D — BUDGET ET OBJECTIFS", num: 18, title: "Quel résultat aimerais-tu obtenir dans les 30 jours ?", sub: "Choix unique", type: "single", options: ["Trouver une idée de business viable à tester", "Apprendre une compétence utile", "Créer ma première offre", "Construire un portfolio de démonstration", "Contacter mes premiers clients potentiels", "Obtenir une première vente", "Mettre en place les bases de mon activité"] },
+      { section: "SECTION D — BUDGET ET OBJECTIFS", num: 19, title: "Quand souhaites-tu commencer ?", sub: "Choix unique", type: "single", options: ["Aujourd'hui", "Dans les prochains jours", "Dans les prochaines semaines", "Plus tard, après m'être formé"] },
+      { section: "SECTION D — BUDGET ET OBJECTIFS", num: 20, title: "Quelle est ta principale contrainte ?", sub: "Choix unique", type: "single", options: ["Aucun budget", "Peu de temps", "Peu de compétences", "Peu de matériel", "Difficulté à trouver des clients", "Peur de me lancer", "Aucune contrainte majeure", "Plusieurs de ces contraintes"] },
+
+      // SECTION E — PRÉFÉRENCES BUSINESS
+      { section: "SECTION E — PRÉFÉRENCES BUSINESS", num: 21, title: "Quels secteurs aimerais-tu explorer ?", sub: "Plusieurs réponses possibles", type: "multi", options: ["Marketing digital", "Création de contenu", "Design graphique", "Produits numériques", "Intelligence artificielle et automatisation", "Services aux entreprises", "Achat-revente et commerce", "Services locaux", "Éducation et accompagnement", "Sport et lifestyle", "Web et technologie", "Tous les secteurs m'intéressent"] },
+      { section: "SECTION E — PRÉFÉRENCES BUSINESS", num: 22, title: "Comment préfères-tu communiquer avec tes clients ?", sub: "Choix unique", type: "single", options: ["Principalement par messages", "Par e-mail", "Par téléphone ou visioconférence", "En personne", "Je préfère limiter les échanges directs", "Peu importe"] },
+      { section: "SECTION E — PRÉFÉRENCES BUSINESS", num: 23, title: "Qu'aimerais-tu principalement vendre ?", sub: "Choix unique", type: "single", options: ["Une prestation de service", "Un produit numérique", "Un produit physique", "Un abonnement ou service récurrent", "Une création personnalisée", "Une solution technique", "Je ne sais pas encore"] },
+      { section: "SECTION E — PRÉFÉRENCES BUSINESS", num: 24, title: "Quel type de problème aimerais-tu résoudre ?", sub: "Choix unique", type: "single", options: ["Aider les entreprises à obtenir plus de clients", "Aider les entreprises à gagner du temps", "Améliorer l'image et la communication d'une marque", "Aider les personnes à apprendre", "Faciliter une tâche grâce à la technologie", "Trouver et vendre des produits utiles", "Aider les personnes dans leur quotidien", "Je n'ai pas de préférence particulière"] },
+      { section: "SECTION E — PRÉFÉRENCES BUSINESS", num: 25, title: "Quel niveau de difficulté acceptes-tu ?", sub: "Choix unique", type: "single", options: ["Très facile : je veux commencer simplement", "Facile à intermédiaire : je suis prêt à apprendre", "Intermédiaire : je peux suivre une formation", "Technique : je suis prêt à apprendre sur plusieurs mois", "Peu importe si le projet me correspond"] },
+
+      // SECTION F — LANCEMENT ET PROSPECTION
+      { section: "SECTION F — LANCEMENT ET PROSPECTION", num: 26, title: "Es-tu prêt à contacter des clients potentiels ?", sub: "Choix unique", type: "single", options: ["Oui, dès maintenant", "Oui, avec des modèles de messages", "Oui, après m'être entraîné", "Pas encore, je préfère créer un produit ou du contenu d'abord"] },
+      { section: "SECTION F — LANCEMENT ET PROSPECTION", num: 27, title: "Quelle méthode préfères-tu pour trouver des clients ?", sub: "Choix unique", type: "single", options: ["Messages privés sur les réseaux sociaux", "E-mails de prospection", "Plateformes spécialisées", "Publications et contenu sur les réseaux sociaux", "Bouche-à-oreille et réseau personnel", "Prospection locale en personne", "Publicité payante", "Je ne sais pas encore"] },
+      { section: "SECTION F — LANCEMENT ET PROSPECTION", num: 28, title: "Quel type de résultat préfères-tu produire ?", sub: "Choix unique", type: "single", options: ["Des visuels ou créations graphiques", "Des textes ou contenus", "Des vidéos", "Des ventes et des résultats commerciaux", "Des automatisations ou solutions techniques", "Des produits physiques", "Une prestation réalisée sur place", "Des cours ou des supports pédagogiques"] },
+      { section: "SECTION F — LANCEMENT ET PROSPECTION", num: 29, title: "Quel niveau d'incertitude acceptes-tu ?", sub: "Choix unique", type: "single", options: ["Je préfère une activité simple à tester avec peu de risques", "J'accepte de tester plusieurs offres avant de trouver la bonne", "Je suis prêt à apprendre et à investir du temps avant d'obtenir des résultats", "Je suis prêt à développer un projet sur le long terme"] },
+      { section: "SECTION F — LANCEMENT ET PROSPECTION", num: 30, title: "Quel accompagnement souhaites-tu recevoir ?", sub: "Choix unique", type: "single", options: ["Un plan très simple, étape par étape", "Des tutoriels et des vidéos", "Des exercices pratiques chaque jour", "Des modèles prêts à utiliser", "De l'aide pour trouver et contacter des clients", "Un mélange de toutes ces solutions"] }
+    ];
+
+    // GENERATOR FOR THE 100 COMPLETE BUSINESS IDEAS DATABASE
+    function generate100BusinessDatabase() {
+      const categories = [
+        { name: "Marketing digital", count: 15 },
+        { name: "Rédaction & Contenu", count: 12 },
+        { name: "Design & Produits", count: 12 },
+        { name: "IA & Automatisation", count: 10 },
+        { name: "Services B2B", count: 10 },
+        { name: "E-commerce & Revente", count: 10 },
+        { name: "Services Locaux", count: 10 },
+        { name: "Éducation & Coaching", count: 8 },
+        { name: "Sport & Lifestyle", count: 6 },
+        { name: "Web & Tech", count: 7 }
+      ];
+
+      const rawBusinessList = [
+        // Marketing Digital (15)
+        { id: "b1", name: "Créateur de carrousels Instagram", cat: "Marketing digital", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Design & création graphique", "Canva", "Instagram / TikTok"] },
+        { id: "b2", name: "Assistant de gestion réseaux sociaux", cat: "Marketing digital", minBudget: 0, diff: "Facile à intermédiaire", time: "2h/j", smartphoneOnly: true, tags: ["Marketing digital & réseaux sociaux", "Gestion de réseaux sociaux"] },
+        { id: "b3", name: "Créateur de visuels Pinterest pour e-commerce", cat: "Marketing digital", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: false, tags: ["Canva", "Design & produits"] },
+        { id: "b4", name: "Rédacteur d'accroches TikTok & Reels", cat: "Marketing digital", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Montage vidéo", "CapCut ou outil de montage"] },
+        { id: "b5", name: "Spécialiste en recherche de hashtags & niches", cat: "Marketing digital", minBudget: 0, diff: "Facile", time: "30min/j", smartphoneOnly: true, tags: ["Instagram / TikTok"] },
+        { id: "b6", name: "Créateur de calendriers éditoriaux", cat: "Marketing digital", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: false, tags: ["Excel ou Google Sheets", "Organisation & gestion"] },
+        { id: "b7", name: "Optimisateur de profils LinkedIn B2B", cat: "Marketing digital", minBudget: 0, diff: "Facile à intermédiaire", time: "1h/j", smartphoneOnly: true, tags: ["Rédaction & écriture"] },
+        { id: "b8", name: "Gestionnaire de commentaires & DM clients", cat: "Marketing digital", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Communication avec les clients"] },
+        { id: "b9", name: "Créateur de campagnes de micro-influenceurs", cat: "Marketing digital", minBudget: 0, diff: "Intermédiaire", time: "2h/j", smartphoneOnly: true, tags: ["Vente & commerce"] },
+        { id: "b10", name: "Consultant en SEO local Google My Business", cat: "Marketing digital", minBudget: 0, diff: "Facile à intermédiaire", time: "1h/j", smartphoneOnly: false, tags: ["Services locaux & bricolage"] },
+        { id: "b11", name: "Créateur de templates de Stories animées", cat: "Marketing digital", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Canva"] },
+        { id: "b12", name: "Planificateur de publications en ligne", cat: "Marketing digital", minBudget: 0, diff: "Facile", time: "30min/j", smartphoneOnly: true, tags: ["Organisation & gestion"] },
+        { id: "b13", name: "Spécialiste prospection par DM Instagram", cat: "Marketing digital", minBudget: 0, diff: "Intermédiaire", time: "2h/j", smartphoneOnly: true, tags: ["Vente et négociation"] },
+        { id: "b14", name: "Concepteur de bio-links interactifs (Linktree/Notion)", cat: "Marketing digital", minBudget: 0, diff: "Facile", time: "30min/j", smartphoneOnly: true, tags: ["Design & création graphique"] },
+        { id: "b15", name: "Analyseur de statistiques et reporting RS", cat: "Marketing digital", minBudget: 0, diff: "Intermédiaire", time: "1h/j", smartphoneOnly: false, tags: ["Excel ou Google Sheets"] },
+
+        // Rédaction & Contenu (12)
+        { id: "b16", name: "Copywriter pour publications LinkedIn", cat: "Rédaction & Contenu", minBudget: 0, diff: "Facile à intermédiaire", time: "1h/j", smartphoneOnly: true, tags: ["Rédaction & écriture", "Rédaction web"] },
+        { id: "b17", name: "Rédacteur de fiches produits e-commerce", cat: "Rédaction & Contenu", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: false, tags: ["Rédaction web"] },
+        { id: "b18", name: "Rédacteur de newsletters hebdomadaires", cat: "Rédaction & Contenu", minBudget: 0, diff: "Intermédiaire", time: "1-2h/j", smartphoneOnly: false, tags: ["Rédaction & écriture"] },
+        { id: "b19", name: "Scénariste pour vidéos YouTube & TikTok", cat: "Rédaction & Contenu", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Montage vidéo"] },
+        { id: "b20", name: "Relecteur et correcteur de documents", cat: "Rédaction & Contenu", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Rédaction & écriture"] },
+        { id: "b21", name: "Rédacteur d'articles de blog SEO", cat: "Rédaction & Contenu", minBudget: 0, diff: "Intermédiaire", time: "2h/j", smartphoneOnly: false, tags: ["Rédaction web"] },
+        { id: "b22", name: "Créateur de scripts de vente téléphonique", cat: "Rédaction & Contenu", minBudget: 0, diff: "Intermédiaire", time: "1h/j", smartphoneOnly: false, tags: ["Vente et négociation"] },
+        { id: "b23", name: "Traducteur de contenus digitaux simples", cat: "Rédaction & Contenu", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Rédaction & écriture"] },
+        { id: "b24", name: "Rédacteur d'E-books synthétiques", cat: "Rédaction & Contenu", minBudget: 0, diff: "Intermédiaire", time: "2h/j", smartphoneOnly: false, tags: ["Rédaction web"] },
+        { id: "b25", name: "Créateur de quiz et sondages d'engagement", cat: "Rédaction & Contenu", minBudget: 0, diff: "Facile", time: "30min/j", smartphoneOnly: true, tags: ["Marketing digital & réseaux sociaux"] },
+        { id: "b26", name: "Rédacteur de biographies d'artistes/pros", cat: "Rédaction & Contenu", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Rédaction & écriture"] },
+        { id: "b27", name: "Scribe de comptes-rendus de réunions audio", cat: "Rédaction & Contenu", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: false, tags: ["Organisation & gestion"] },
+
+        // Design & Produits Numériques (12)
+        { id: "b28", name: "Créateur de kits de visuels Canva prêt-à-l'emploi", cat: "Design & Produits", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: false, tags: ["Canva", "Design & création graphique"] },
+        { id: "b29", name: "Vendeur de planners PDF à imprimer", cat: "Design & Produits", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: false, tags: ["Canva"] },
+        { id: "b30", name: "Concepteur de logos simples pour TPE", cat: "Design & Produits", minBudget: 0, diff: "Facile à intermédiaire", time: "1h/j", smartphoneOnly: false, tags: ["Design & création graphique"] },
+        { id: "b31", name: "Designer de présentations Pitch Deck PowerPoint", cat: "Design & Produits", minBudget: 0, diff: "Intermédiaire", time: "2h/j", smartphoneOnly: false, tags: ["Design & création graphique"] },
+        { id: "b32", name: "Créateur d'icônes & éléments graphiques Web", cat: "Design & Produits", minBudget: 0, diff: "Intermédiaire", time: "1-2h/j", smartphoneOnly: false, tags: ["Design & création graphique"] },
+        { id: "b33", name: "Concepteur de cartes de visite virtuelles QR Code", cat: "Design & Produits", minBudget: 0, diff: "Facile", time: "30min/j", smartphoneOnly: true, tags: ["Canva"] },
+        { id: "b34", name: "Créateur de CV design pour étudiants", cat: "Design & Produits", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Canva"] },
+        { id: "b35", name: "Designer de miniatures YouTube à fort taux de clic", cat: "Design & Produits", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Canva"] },
+        { id: "b36", name: "Concepteur de guides explicatifs illustrés", cat: "Design & Produits", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: false, tags: ["Design & création graphique"] },
+        { id: "b37", name: "Créateur de chartes graphiques de marque", cat: "Design & Produits", minBudget: 0, diff: "Intermédiaire", time: "2h/j", smartphoneOnly: false, tags: ["Design & création graphique"] },
+        { id: "b38", name: "Illustrateur de portraits digitaux personnalisés", cat: "Design & Produits", minBudget: 0, diff: "Intermédiaire", time: "2h/j", smartphoneOnly: false, tags: ["Design & création graphique"] },
+        { id: "b39", name: "Créateur de stickers digitaux WhatsApp / Telegram", cat: "Design & Produits", minBudget: 0, diff: "Facile", time: "30min/j", smartphoneOnly: true, tags: ["Canva"] },
+
+        // IA & Automatisation (10)
+        { id: "b40", name: "Générateur de Prompts ChatGPT spécialisés", cat: "IA & Automatisation", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Outils d'IA (ChatGPT, Midjourney...)", "Intelligence artificielle"] },
+        { id: "b41", name: "Intégrateur de Chatbots de messagerie", cat: "IA & Automatisation", minBudget: 0, diff: "Intermédiaire", time: "2h/j", smartphoneOnly: false, tags: ["Utilisation d'outils d'IA"] },
+        { id: "b42", name: "Créateur d'images IA pour marques (Midjourney)", cat: "IA & Automatisation", minBudget: 10, diff: "Facile à intermédiaire", time: "1h/j", smartphoneOnly: true, tags: ["Outils d'IA (ChatGPT, Midjourney...)"] },
+        { id: "b43", name: "Automatiseur de tri d'e-mails professionnels", cat: "IA & Automatisation", minBudget: 0, diff: "Intermédiaire", time: "1h/j", smartphoneOnly: false, tags: ["Intelligence artificielle"] },
+        { id: "b44", name: "Conseiller en intégration d'outils d'IA pour TPE", cat: "IA & Automatisation", minBudget: 0, diff: "Intermédiaire", time: "2h/j", smartphoneOnly: false, tags: ["Intelligence artificielle"] },
+        { id: "b45", name: "Créateur d'Avatars IA pour vidéos explicatives", cat: "IA & Automatisation", minBudget: 15, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["CapCut ou outil de montage"] },
+        { id: "b46", name: "Automatiseur de transferts Google Sheets/Notion", cat: "IA & Automatisation", minBudget: 0, diff: "Intermédiaire", time: "1h/j", smartphoneOnly: false, tags: ["Excel ou Google Sheets"] },
+        { id: "b47", name: "Formateur individuel prise en main de ChatGPT", cat: "IA & Automatisation", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Enseignement & coaching"] },
+        { id: "b48", name: "Générateur de résumés audio/texte automatisés", cat: "IA & Automatisation", minBudget: 0, diff: "Facile", time: "30min/j", smartphoneOnly: true, tags: ["Outils d'IA (ChatGPT, Midjourney...)"] },
+        { id: "b49", name: "Concepteur de workflows Zapier / Make de base", cat: "IA & Automatisation", minBudget: 0, diff: "Technique", time: "2h/j", smartphoneOnly: false, tags: ["Intelligence artificielle"] },
+
+        // Services B2B & Administratif (10)
+        { id: "b50", name: "Assistant virtuel administratif", cat: "Services B2B", minBudget: 0, diff: "Facile", time: "2h/j", smartphoneOnly: false, tags: ["Organisation & gestion"] },
+        { id: "b51", name: "Constituteur de bases de données de prospects B2B", cat: "Services B2B", minBudget: 0, diff: "Facile", time: "1-2h/j", smartphoneOnly: false, tags: ["Excel ou Google Sheets"] },
+        { id: "b52", name: "Metteur en forme de documents professionnels Word/PDF", cat: "Services B2B", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: false, tags: ["Organisation & gestion"] },
+        { id: "b53", name: "Planificateur de rendez-vous & gestion d'agenda", cat: "Services B2B", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Communication avec les clients"] },
+        { id: "b54", name: "Opérateur de saisie de données Excel", cat: "Services B2B", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: false, tags: ["Excel ou Google Sheets"] },
+        { id: "b55", name: "Gestionnaire de boîtes e-mails débordées", cat: "Services B2B", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Organisation & gestion"] },
+        { id: "b56", name: "Enquêteur de satisfaction client par téléphone", cat: "Services B2B", minBudget: 0, diff: "Facile", time: "1-2h/j", smartphoneOnly: true, tags: ["Communication avec les clients"] },
+        { id: "b57", name: "Organisateur d'événements d'entreprise virtuels", cat: "Services B2B", minBudget: 0, diff: "Intermédiaire", time: "2h/j", smartphoneOnly: false, tags: ["Organisation & gestion"] },
+        { id: "b58", name: "Préparateur de factures et relance d'impayés", cat: "Services B2B", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: false, tags: ["Excel ou Google Sheets"] },
+        { id: "b59", name: "Acheteur mystère pour commerces locaux", cat: "Services B2B", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Services locaux & bricolage"] },
+
+        // E-commerce & Revente (10)
+        { id: "b60", name: "Achat-revente de vêtements vintage sur Vinted", cat: "E-commerce & Revente", minBudget: 20, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Plateformes de vente (Vinted, Leboncoin...)"] },
+        { id: "b61", name: "Revente d'objets high-tech reconditionnés", cat: "E-commerce & Revente", minBudget: 50, diff: "Intermédiaire", time: "1h/j", smartphoneOnly: true, tags: ["Plateformes de vente (Vinted, Leboncoin...)"] },
+        { id: "b62", name: "Dépôt-vente d'articles pour proches & voisins", cat: "E-commerce & Revente", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Vente & commerce"] },
+        { id: "b63", name: "Créateur de bougies artisanales personnalisées", cat: "E-commerce & Revente", minBudget: 30, diff: "Facile", time: "2h/j", smartphoneOnly: false, tags: ["Bricolage / Compétences manuelles"] },
+        { id: "b64", name: "Revente de livres d'occasion ciblés", cat: "E-commerce & Revente", minBudget: 15, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Plateformes de vente (Vinted, Leboncoin...)"] },
+        { id: "b65", name: "Créateur de bijoux faits main tendance", cat: "E-commerce & Revente", minBudget: 25, diff: "Facile", time: "2h/j", smartphoneOnly: false, tags: ["Bricolage / Compétences manuelles"] },
+        { id: "b66", name: "Photographe produit pour petites boutiques", cat: "E-commerce & Revente", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Appareil photo / Matériel vidéo"] },
+        { id: "b67", name: "Créateur de box cadeaux thématiques", cat: "E-commerce & Revente", minBudget: 40, diff: "Intermédiaire", time: "2h/j", smartphoneOnly: false, tags: ["Vente & commerce"] },
+        { id: "b68", name: "Revente d'accessoires de mode customisés", cat: "E-commerce & Revente", minBudget: 30, diff: "Facile à intermédiaire", time: "2h/j", smartphoneOnly: false, tags: ["Mode & vêtements"] },
+        { id: "b69", name: "Curateur de cartes à collectionner (Pokemon/TCG)", cat: "E-commerce & Revente", minBudget: 50, diff: "Intermédiaire", time: "1h/j", smartphoneOnly: true, tags: ["Vente & commerce"] },
+
+        // Services Locaux & Proximité (10)
+        { id: "b70", name: "Aide à la numérisation de vieilles photos", cat: "Services Locaux", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Services locaux & bricolage"] },
+        { id: "b71", name: "Pet-sitter et promenade de chiens", cat: "Services Locaux", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Services locaux & bricolage"] },
+        { id: "b72", name: "Assistant pour courses et livraisons de quartier", cat: "Services Locaux", minBudget: 0, diff: "Facile", time: "1-2h/j", smartphoneOnly: true, tags: ["Services locaux & bricolage"] },
+        { id: "b73", name: "Nettoyage écologique de voitures à domicile", cat: "Services Locaux", minBudget: 20, diff: "Facile", time: "2h/j", smartphoneOnly: false, tags: ["Bricolage / Compétences manuelles"] },
+        { id: "b74", name: "Aide à la configuration de smartphones pour seniors", cat: "Services Locaux", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Communication avec les clients"] },
+        { id: "b75", name: "Organisateur de vides-greniers et débarras", cat: "Services Locaux", minBudget: 0, diff: "Facile", time: "2h/j", smartphoneOnly: false, tags: ["Bricolage / Compétences manuelles"] },
+        { id: "b76", name: "Jardinage de base et arrosage durant l'été", cat: "Services Locaux", minBudget: 10, diff: "Facile", time: "1-2h/j", smartphoneOnly: false, tags: ["Bricolage / Compétences manuelles"] },
+        { id: "b77", name: "Monteur de meubles en kit à domicile", cat: "Services Locaux", minBudget: 0, diff: "Facile", time: "2h/j", smartphoneOnly: false, tags: ["Bricolage / Compétences manuelles"] },
+        { id: "b78", name: "Aide au déménagement local pour étudiants", cat: "Services Locaux", minBudget: 0, diff: "Facile", time: "2h/j", smartphoneOnly: false, tags: ["Services locaux & bricolage"] },
+        { id: "b79", name: "Gardien de plantes à domicile pendant les vacances", cat: "Services Locaux", minBudget: 0, diff: "Facile", time: "30min/j", smartphoneOnly: true, tags: ["Services locaux & bricolage"] },
+
+        // Éducation & Coaching (8)
+        { id: "b80", name: "Tuteur scolaire pour collégiens/lycéens", cat: "Éducation & Coaching", minBudget: 0, diff: "Facile à intermédiaire", time: "1h/j", smartphoneOnly: true, tags: ["Enseignement & coaching"] },
+        { id: "b81", name: "Formateur individuel aux bases de Canva", cat: "Éducation & Coaching", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Canva"] },
+        { id: "b82", name: "Coach d'organisation et de gestion du temps", cat: "Éducation & Coaching", minBudget: 0, diff: "Intermédiaire", time: "1h/j", smartphoneOnly: true, tags: ["Organisation & gestion"] },
+        { id: "b83", name: "Professeur de conversation en français/anglais", cat: "Éducation & Coaching", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Enseignement & coaching"] },
+        { id: "b84", name: "Animateur d'ateliers créatifs en ligne", cat: "Éducation & Coaching", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: false, tags: ["Design & création graphique"] },
+        { id: "b85", name: "Initiateur aux outils numériques pour débutants", cat: "Éducation & Coaching", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Enseignement & coaching"] },
+        { id: "b86", name: "Auteur de fiches de révision et fiches de synthèse", cat: "Éducation & Coaching", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: false, tags: ["Rédaction & écriture"] },
+        { id: "b87", name: "Coach de prise de parole face caméra", cat: "Éducation & Coaching", minBudget: 0, diff: "Intermédiaire", time: "1h/j", smartphoneOnly: true, tags: ["Montage vidéo"] },
+
+        // Sport, Bien-être & Lifestyle (6)
+        { id: "b88", name: "Concepteur de programmes de remise en forme PDF", cat: "Sport & Lifestyle", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Sport & bien-être"] },
+        { id: "b89", name: "Créateur de menualizers & recettes healthy", cat: "Sport & Lifestyle", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Sport & bien-être"] },
+        { id: "b90", name: "Partenaire de motivation et suivi sportif à distance", cat: "Sport & Lifestyle", minBudget: 0, diff: "Facile", time: "30min/j", smartphoneOnly: true, tags: ["Sport & bien-être"] },
+        { id: "b91", name: "Créateur de playlists d'entraînement personnalisées", cat: "Sport & Lifestyle", minBudget: 0, diff: "Facile", time: "30min/j", smartphoneOnly: true, tags: ["Sport & bien-être"] },
+        { id: "b92", name: "Rédacteur de guides de méditation et bien-être", cat: "Sport & Lifestyle", minBudget: 0, diff: "Facile", time: "1h/j", smartphoneOnly: true, tags: ["Sport & bien-être"] },
+        { id: "b93", name: "Personal Shopper seconde main sur mesure", cat: "Sport & Lifestyle", minBudget: 0, diff: "Facile à intermédiaire", time: "1-2h/j", smartphoneOnly: true, tags: ["Mode & vêtements"] },
+
+        // Web & Tech (7)
+        { id: "b94", name: "Créateur de sites vitrines simples (Carrd / Wix)", cat: "Web & Tech", minBudget: 0, diff: "Facile à intermédiaire", time: "1-2h/j", smartphoneOnly: false, tags: ["Développement web", "CMS (WordPress, Shopify...)"] },
+        { id: "b95", name: "Audit de vitesse et d'ergonomie pour petits sites", cat: "Web & Tech", minBudget: 0, diff: "Intermédiaire", time: "1h/j", smartphoneOnly: false, tags: ["Développement web"] },
+        { id: "b96", name: "Créateur de formulaires de contact intelligents", cat: "Web & Tech", minBudget: 0, diff: "Facile", time: "30min/j", smartphoneOnly: false, tags: ["Développement web"] },
+        { id: "b97", name: "Configurateur de noms de domaine & e-mails pros", cat: "Web & Tech", minBudget: 0, diff: "Facile", time: "30min/j", smartphoneOnly: false, tags: ["Développement web"] },
+        { id: "b98", name: "Nettoyeur de spams & sécurisation de sites WordPress", cat: "Web & Tech", minBudget: 0, diff: "Intermédiaire", time: "1h/j", smartphoneOnly: false, tags: ["CMS (WordPress, Shopify...)"] },
+        { id: "b99", name: "Créateur d'espaces de travail Notion sur-mesure", cat: "Web & Tech", minBudget: 0, diff: "Facile à intermédiaire", time: "1h/j", smartphoneOnly: false, tags: ["Organisation & gestion"] },
+        { id: "b100", name: "Aide à l'installation d'outils analytics simples", cat: "Web & Tech", minBudget: 0, diff: "Intermédiaire", time: "1h/j", smartphoneOnly: false, tags: ["Développement web"] }
+      ];
+
+      return rawBusinessList.map((item, index) => {
+        return {
+          id: item.id,
+          name: `${index + 1}. ${item.name}`,
+          category: item.cat,
+          minBudgetReq: item.minBudget,
+          difficulty: item.diff,
+          timeReq: item.time,
+          smartphoneOnly: item.smartphoneOnly,
+          description: `Solution concrète d'activité sous le modèle : ${item.name}. Idéal pour se lancer rapidement.`,
+          problemSolved: `Permet de résoudre un besoin direct dans la catégorie ${item.cat} sans investissement lourd.`,
+          clientTarget: "TPE, indépendants, particuliers ou créateurs de contenu.",
+          monetization: "Tarification à la prestation ou forfait mensuel.",
+          materials: item.smartphoneOnly ? "Smartphone et connexion internet." : "Ordinateur ou smartphone performant.",
+          skillsToLearn: "Pratique guidée et maîtrise des outils gratuits recommandés.",
+          day1Task: "Créer sa première offre de démonstration et définir ses tarifs.",
+          tags: item.tags || []
+        };
+      });
+    }
+
+    // STATE VARIABLES
+    const businessDatabase = generate100BusinessDatabase();
+    let currentQIndex = 0;
+    let quizAnswers = JSON.parse(localStorage.getItem('lance_answers_v3') || '{}');
+    let selectedBusiness = JSON.parse(localStorage.getItem('lance_active_biz') || 'null') || businessDatabase[0];
+    let userFavorites = JSON.parse(localStorage.getItem('lance_favs') || '[]');
+    let userProspects = JSON.parse(localStorage.getItem('lance_prospects') || '[]');
+    let userRevenue = parseFloat(localStorage.getItem('lance_revenue') || '0');
+    let activeFilterSmartphone = false;
+    let activeFilterFacile = false;
+    let activeFilterFavoris = false;
+
+    window.onload = function() {
+      updateClock();
+      setInterval(updateClock, 30000);
+
+      renderCategoryTagsHome();
+      renderCatalog();
+      updateFavoriteCountBadge();
+      updateDashboardUI();
+
+      if (Object.keys(quizAnswers).length >= 5) {
+        calculateAndShowResults(false);
+      } else {
+        renderResultsEmptyState();
+      }
+
+      if (selectedBusiness) {
+        setActiveBusiness(selectedBusiness.id, false);
+      }
+    };
+
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const mins = String(now.getMinutes()).padStart(2, '0');
+      const clockEl = document.getElementById('top-clock');
+      if (clockEl) clockEl.innerText = `${hours}:${mins}`;
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      const target = document.getElementById('tab-' + tabId);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-btn-mobile').forEach(btn => {
+        btn.classList.remove('text-zinc-900');
+        btn.classList.add('text-zinc-400');
+        if (btn.getAttribute('data-tab') === tabId) {
+          btn.classList.add('text-zinc-900');
+          btn.classList.remove('text-zinc-400');
+        }
+      });
+    }
+
+    function renderCategoryTagsHome() {
+      const container = document.getElementById('home-category-tags');
+      if (!container) return;
+      const cats = [
+        { name: "Marketing digital", count: 15, icon: "fa-hashtag" },
+        { name: "Rédaction & Contenu", count: 12, icon: "fa-pen-nib" },
+        { name: "Design & Produits", count: 12, icon: "fa-palette" },
+        { name: "IA & Automatisation", count: 10, icon: "fa-robot" }
+      ];
+      container.innerHTML = cats.map(c => `
+        <div onclick="filterCatalogByCategory('${c.name}')" class="p-2.5 rounded-xl border border-zinc-200 bg-white hover:bg-zinc-100 transition cursor-pointer flex items-center space-x-2">
+          <i class="fa-solid ${c.icon} text-zinc-700 text-xs"></i>
+          <div>
+            <p class="font-bold text-zinc-900 leading-none">${c.name}</p>
+            <span class="text-[9px] text-zinc-400">${c.count} idées</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterCatalogByCategory(catName) {
+      switchTab('catalogue');
+      const catSelect = document.getElementById('catalog-filter-cat');
+      if (catSelect) {
+        catSelect.value = catName;
+        filterCatalog();
+      }
+    }
+
+    // QUIZ LOGIC
+    function startQuiz() {
+      document.getElementById('quiz-intro').classList.add('hidden');
+      document.getElementById('quiz-container').classList.remove('hidden');
+      currentQIndex = 0;
+      loadQuestion(currentQIndex);
+    }
+
+    function loadQuestion(index) {
+      const q = fullQuestions[index];
+      document.getElementById('quiz-section-title').innerText = q.section;
+      document.getElementById('quiz-progress-text').innerText = `${q.num} / ${fullQuestions.length}`;
+      document.getElementById('q-number-tag').innerText = `Question ${q.num}`;
+      document.getElementById('q-title').innerText = q.title;
+      document.getElementById('q-subtext').innerText = q.sub;
+
+      const progressPercent = Math.round(((index + 1) / fullQuestions.length) * 100);
+      document.getElementById('quiz-progress-bar').style.width = `${progressPercent}%`;
+
+      const optionsContainer = document.getElementById('q-options-container');
+      optionsContainer.innerHTML = '';
+
+      q.options.forEach(optText => {
+        const btn = document.createElement('button');
+        btn.className = 'w-full text-left p-3 rounded-xl bg-white border border-zinc-200 active:bg-zinc-100 transition flex items-center space-x-2.5 text-xs text-zinc-800 shadow-sm';
+
+        const isSelected = quizAnswers[q.num] && (
+          q.type === 'multi' ? quizAnswers[q.num].includes(optText) : quizAnswers[q.num] === optText
+        );
+
+        if (isSelected) {
+          btn.classList.add('border-zinc-900', 'bg-zinc-100', 'font-bold');
+        }
+
+        btn.onclick = () => selectOption(q.num, optText, q.type);
+        btn.innerHTML = `
+          <div class="w-3.5 h-3.5 shrink-0 rounded ${q.type === 'multi' ? 'rounded' : 'rounded-full'} border border-zinc-300 flex items-center justify-center text-[9px] ${isSelected ? 'bg-zinc-900 text-white border-zinc-900' : ''}">
+            ${isSelected ? '<i class="fa-solid fa-check"></i>' : ''}
+          </div>
+          <span class="flex-1 leading-tight">${optText}</span>
+        `;
+        optionsContainer.appendChild(btn);
+      });
+
+      document.getElementById('q-prev-btn').disabled = (index === 0);
+    }
+
+    function selectOption(qNum, value, type) {
+      if (type === 'multi') {
+        if (!quizAnswers[qNum]) quizAnswers[qNum] = [];
+        if (quizAnswers[qNum].includes(value)) {
+          quizAnswers[qNum] = quizAnswers[qNum].filter(v => v !== value);
+        } else {
+          quizAnswers[qNum].push(value);
+        }
+      } else {
+        quizAnswers[qNum] = value;
+      }
+      localStorage.setItem('lance_answers_v3', JSON.stringify(quizAnswers));
+      loadQuestion(currentQIndex);
+    }
+
+    function prevQuestion() {
+      if (currentQIndex > 0) {
+        currentQIndex--;
+        loadQuestion(currentQIndex);
+      }
+    }
+
+    function nextQuestion() {
+      if (currentQIndex < fullQuestions.length - 1) {
+        currentQIndex++;
+        loadQuestion(currentQIndex);
+      } else {
+        document.getElementById('quiz-container').classList.add('hidden');
+        document.getElementById('quiz-outro').classList.remove('hidden');
+      }
+    }
+
+    // DETERMINISTIC SCORING ENGINE
+    function calculateAndShowResults(redirect = true) {
+      const userAnswersFlat = Object.values(quizAnswers).flat();
+      const userBudget = quizAnswers[16] || "0 €";
+      const userTime = quizAnswers[11] || "";
+      const userLevel = quizAnswers[25] || "";
+
+      let scoredList = businessDatabase.map(biz => {
+        let score = 0;
+        let activeRules = [];
+        let excluded = false;
+
+        // Hard budget barrier rule
+        if (userBudget === "0 €" && biz.minBudgetReq > 0) {
+          excluded = true;
+        }
+
+        if (!excluded) {
+          biz.tags.forEach(tag => {
+            if (userAnswersFlat.includes(tag)) {
+              score += 2;
+              activeRules.push(`Compatibilité directe : ${tag} (+2 pts)`);
+            }
+          });
+
+          if (biz.difficulty.includes("Facile")) {
+            score += 1;
+            activeRules.push("Lancement accessible débutant (+1 pt)");
+          }
+
+          if (userTime && biz.timeReq.includes("1h")) {
+            score += 1;
+            activeRules.push("Format de temps compatible (+1 pt)");
+          }
+        }
+
+        return {
+          ...biz,
+          score: score,
+          excluded: excluded,
+          activeRules: activeRules
+        };
+      });
+
+      const validResults = scoredList.filter(b => !b.excluded).sort((a, b) => b.score - a.score);
+
+      renderResultsUI(validResults.slice(0, 5));
+      if (redirect) switchTab('resultats');
+    }
+
+    function renderResultsEmptyState() {
+      const container = document.getElementById('results-cards-container');
+      if (container) {
+        container.innerHTML = `
+          <div class="card-sophisticated p-5 text-center space-y-3">
+            <i class="fa-solid fa-clipboard-check text-2xl text-zinc-400"></i>
+            <h3 class="font-bold text-xs text-zinc-800">Aucun résultat pour l'instant</h3>
+            <p class="text-[11px] text-zinc-500">Réponds au questionnaire 30Q pour que notre algorithme calcule tes correspondances sur mesure.</p>
+            <button onclick="switchTab('questionnaire')" class="px-4 py-2 bg-zinc-900 text-white text-xs font-bold rounded-xl">Lancer le Quiz</button>
+          </div>
+        `;
+      }
+    }
+
+    function renderResultsUI(topList) {
+      const container = document.getElementById('results-cards-container');
+      const profileSummary = document.getElementById('results-profile-summary');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      if (profileSummary) {
+        const bgt = quizAnswers[16] || "Non spécifié";
+        const dispo = quizAnswers[11] || "Non spécifié";
+        profileSummary.innerHTML = `
+          <p class="font-bold text-zinc-800">Profil analysé :</p>
+          <p>Budget initial : <span class="font-bold text-zinc-900">${bgt}</span> | Disponibilité : <span class="font-bold text-zinc-900">${dispo}</span></p>
+        `;
+      }
+
+      if (topList.length === 0) {
+        container.innerHTML = `<div class="p-4 bg-white rounded-xl text-center text-xs text-zinc-500">Aucun business ne correspond à tes filtres stricts. Essaie d'ajuster tes critères.</div>`;
+        return;
+      }
+
+      topList.forEach((biz, idx) => {
+        const card = document.createElement('div');
+        card.className = "card-sophisticated p-4 space-y-2 border border-zinc-200";
+        card.innerHTML = `
+          <div class="flex items-center justify-between border-b border-zinc-100 pb-2">
+            <div>
+              <span class="text-[9px] font-bold text-zinc-500 uppercase">Rang #${idx + 1} — Score : ${biz.score} pts</span>
+              <h3 class="text-xs font-extrabold text-zinc-900 mt-0.5">${biz.name}</h3>
+            </div>
+            <span class="text-[10px] font-bold text-zinc-700 bg-zinc-100 px-2 py-0.5 rounded">${biz.difficulty}</span>
+          </div>
+
+          <p class="text-[11px] text-zinc-600">${biz.description}</p>
+
+          <div class="bg-zinc-50 p-2 rounded-lg space-y-1 text-[10px]">
+            <p class="font-bold text-zinc-700">Règles activées :</p>
+            <ul class="list-disc list-inside text-zinc-500 space-y-0.5">
+              ${biz.activeRules.length > 0 ? biz.activeRules.map(r => `<li>${r}</li>`).join('') : '<li>Critères généraux compatibles</li>'}
+            </ul>
+          </div>
+
+          <div class="flex space-x-2 pt-1">
+            <button onclick="openBizModal('${biz.id}')" class="w-1/2 text-[11px] bg-white border border-zinc-200 text-zinc-800 font-bold py-2 rounded-lg active:bg-zinc-50 transition">
+              Fiche Détaillée
+            </button>
+            <button onclick="setActiveBusiness('${biz.id}')" class="w-1/2 text-[11px] bg-zinc-900 text-white font-bold py-2 rounded-lg active:bg-zinc-800 transition">
+              Choisir ce Projet
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // CATALOG & FILTERING ENGINE
+    function renderCatalog() {
+      const grid = document.getElementById('catalog-grid');
+      if (!grid) return;
+
+      grid.innerHTML = '';
+      let visibleCount = 0;
+
+      const searchVal = (document.getElementById('catalog-search')?.value || '').toLowerCase();
+      const catVal = document.getElementById('catalog-filter-cat')?.value || 'all';
+      const budgetVal = document.getElementById('catalog-filter-budget')?.value || 'all';
+
+      businessDatabase.forEach(item => {
+        const isFav = userFavorites.includes(item.id);
+
+        // Search match
+        const matchesSearch = item.name.toLowerCase().includes(searchVal) ||
+                              item.description.toLowerCase().includes(searchVal) ||
+                              item.category.toLowerCase().includes(searchVal);
+
+        // Category match
+        const matchesCat = (catVal === 'all' || item.category === catVal);
+
+        // Budget match
+        let matchesBudget = true;
+        if (budgetVal === '0') matchesBudget = item.minBudgetReq === 0;
+        else if (budgetVal === '20') matchesBudget = item.minBudgetReq <= 20;
+        else if (budgetVal === '50') matchesBudget = item.minBudgetReq <= 50;
+        else if (budgetVal === '100') matchesBudget = item.minBudgetReq <= 100;
+
+        // Toggle badge matches
+        let matchesSmartphone = !activeFilterSmartphone || item.smartphoneOnly;
+        let matchesFacile = !activeFilterFacile || item.difficulty.includes("Facile");
+        let matchesFav = !activeFilterFavoris || isFav;
+
+        if (matchesSearch && matchesCat && matchesBudget && matchesSmartphone && matchesFacile && matchesFav) {
+          visibleCount++;
+          const card = document.createElement('div');
+          card.className = "card-sophisticated p-3 space-y-1.5 border border-zinc-200 hover:border-zinc-300 transition cursor-pointer relative";
+          card.innerHTML = `
+            <div class="flex justify-between items-center pr-6">
+              <span class="text-[8px] font-bold uppercase px-1.5 py-0.5 rounded bg-zinc-100 text-zinc-700 border border-zinc-200">${item.category}</span>
+              <span class="text-[10px] font-bold text-zinc-500">${item.timeReq}</span>
+            </div>
+            <h4 class="font-bold text-zinc-900 text-xs">${item.name}</h4>
+            <p class="text-[10px] text-zinc-500 line-clamp-2">${item.description}</p>
+            <div class="flex items-center justify-between pt-1 border-t border-zinc-100 text-[10px]">
+              <span class="font-semibold text-zinc-700">${item.minBudgetReq === 0 ? '0 € requis' : item.minBudgetReq + ' € max'}</span>
+              <span class="text-zinc-500">${item.difficulty}</span>
+            </div>
+            <button onclick="toggleFavorite(event, '${item.id}')" class="absolute top-3 right-3 text-sm ${isFav ? 'text-amber-500' : 'text-zinc-300 hover:text-zinc-500'}">
+              <i class="fa-solid fa-bookmark"></i>
+            </button>
+          `;
+          card.onclick = (e) => {
+            if (!e.target.closest('button')) openBizModal(item.id);
+          };
+          grid.appendChild(card);
+        }
+      });
+
+      const badge = document.getElementById('catalog-count-badge');
+      if (badge) badge.innerText = `${visibleCount} / 100`;
+
+      if (visibleCount === 0) {
+        grid.innerHTML = `
+          <div class="p-6 text-center text-xs text-zinc-400 card-sophisticated space-y-1">
+            <i class="fa-solid fa-filter-circle-xmark text-lg text-zinc-300"></i>
+            <p class="font-bold text-zinc-700">Aucun business trouvé</p>
+            <p>Essaie de réinitialiser tes filtres de recherche.</p>
+          </div>
+        `;
+      }
+    }
+
+    function filterCatalog() {
+      renderCatalog();
+    }
+
+    function toggleFilterBadge(type) {
+      if (type === 'smartphone') {
+        activeFilterSmartphone = !activeFilterSmartphone;
+        document.getElementById('btn-filter-smartphone').classList.toggle('bg-zinc-900');
+        document.getElementById('btn-filter-smartphone').classList.toggle('text-white');
+      } else if (type === 'facile') {
+        activeFilterFacile = !activeFilterFacile;
+        document.getElementById('btn-filter-facile').classList.toggle('bg-zinc-900');
+        document.getElementById('btn-filter-facile').classList.toggle('text-white');
+      } else if (type === 'favoris') {
+        activeFilterFavoris = !activeFilterFavoris;
+        document.getElementById('btn-filter-favoris').classList.toggle('bg-amber-500');
+        document.getElementById('btn-filter-favoris').classList.toggle('text-white');
+      }
+      renderCatalog();
+    }
+
+    function toggleFavorite(e, id) {
+      if (e) e.stopPropagation();
+      if (userFavorites.includes(id)) {
+        userFavorites = userFavorites.filter(f => f !== id);
+      } else {
+        userFavorites.push(id);
+      }
+      localStorage.setItem('lance_favs', JSON.stringify(userFavorites));
+      updateFavoriteCountBadge();
+      renderCatalog();
+    }
+
+    function updateFavoriteCountBadge() {
+      const el = document.getElementById('fav-count');
+      if (el) el.innerText = userFavorites.length;
+    }
+
+    // MODAL DETAILS
+    function openBizModal(bizId) {
+      const biz = businessDatabase.find(b => b.id === bizId);
+      if (!biz) return;
+
+      const modal = document.getElementById('biz-modal');
+      const content = document.getElementById('modal-content');
+      const isFav = userFavorites.includes(biz.id);
+
+      content.innerHTML = `
+        <div class="flex items-center justify-between border-b border-zinc-100 pb-2 pr-6">
+          <span class="text-[9px] font-bold uppercase px-2 py-0.5 bg-zinc-100 text-zinc-700 rounded">${biz.category}</span>
+          <span class="text-[10px] font-bold text-emerald-600">${biz.difficulty}</span>
+        </div>
+
+        <h3 class="text-sm font-extrabold text-zinc-900">${biz.name}</h3>
+        <p class="text-xs text-zinc-600 leading-relaxed">${biz.description}</p>
+
+        <div class="space-y-2 text-[11px] bg-zinc-50 p-3 rounded-xl border border-zinc-200/80">
+          <p><strong class="text-zinc-800">Problème résolu :</strong> ${biz.problemSolved}</p>
+          <p><strong class="text-zinc-800">Cible client :</strong> ${biz.clientTarget}</p>
+          <p><strong class="text-zinc-800">Matériel :</strong> ${biz.materials}</p>
+          <p><strong class="text-zinc-800">Monétisation :</strong> ${biz.monetization}</p>
+          <p><strong class="text-zinc-800">Budget requis :</strong> ${biz.minBudgetReq} €</p>
+        </div>
+
+        <div class="flex space-x-2 pt-2">
+          <button onclick="toggleFavorite(null, '${biz.id}'); openBizModal('${biz.id}');" class="w-1/3 py-2 border border-zinc-200 rounded-xl text-xs font-bold text-zinc-700 flex items-center justify-center space-x-1">
+            <i class="fa-solid fa-bookmark ${isFav ? 'text-amber-500' : ''}"></i>
+            <span>${isFav ? 'Favori' : 'Ajouter'}</span>
+          </button>
+          <button onclick="setActiveBusiness('${biz.id}'); closeBizModal();" class="w-2/3 py-2 bg-zinc-900 text-white rounded-xl text-xs font-bold shadow">
+            Choisir & Lancer 30J
+          </button>
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeBizModal() {
+      document.getElementById('biz-modal').classList.add('hidden');
+    }
+
+    // 30 DAYS ROADMAP LOGIC
+    function setActiveBusiness(bizId, redirect = true) {
+      selectedBusiness = businessDatabase.find(b => b.id === bizId) || businessDatabase[0];
+      localStorage.setItem('lance_active_biz', JSON.stringify(selectedBusiness));
+
+      document.getElementById('dash-selected-biz').innerText = selectedBusiness.name.replace(/^\d+\.\s*/, '');
+      document.getElementById('plan-selected-title').innerText = selectedBusiness.name.replace(/^\d+\.\s*/, '');
+      document.getElementById('calendar-active-biz-name').innerText = selectedBusiness.name.replace(/^\d+\.\s*/, '');
+
+      renderCalendarForBusiness(selectedBusiness);
+      updateDashboardUI();
+
+      if (redirect) switchTab('calendrier');
+    }
+
+    function renderCalendarForBusiness(biz) {
+      const container = document.getElementById('calendar-days-container');
+      if (!container) return;
+
+      container.innerHTML = '';
+      const savedTasks = JSON.parse(localStorage.getItem(`lance_tasks_${biz.id}`) || '{}');
+
+      for (let day = 1; day <= 30; day++) {
+        let title = `Jour ${day} : Action Opérationnelle`;
+        let lesson = `Exécution des tâches prioritaires pour ${biz.name}.`;
+
+        if (day === 1) {
+          title = `Jour 1 : ${biz.day1Task}`;
+          lesson = `Mise en place immédiate sans hésitation.`;
+        } else if (day <= 5) {
+          title = `Jour ${day} : Structuration de l'offre et tarifs`;
+          lesson = `Définis tes paquets de prestations.`;
+        } else if (day <= 15) {
+          title = `Jour ${day} : Création d'exemples de démonstration`;
+          lesson = `Prépare des visuels ou cas d'usage réels.`;
+        } else if (day <= 25) {
+          title = `Jour ${day} : Prises de contact & Prospection`;
+          lesson = `Envoie au moins 3 messages personnalisés par jour.`;
+        } else {
+          title = `Jour ${day} : Optimisation & Premières ventes`;
+          lesson = `Ajuste ton offre selon les retours.`;
+        }
+
+        const isChecked = !!savedTasks[day];
+
+        const item = document.createElement('div');
+        item.className = "card-sophisticated p-3 flex items-start space-x-2.5 border border-zinc-200";
+        item.innerHTML = `
+          <input type="checkbox" onchange="toggleTaskProgress('${biz.id}', ${day}, this.checked)" ${isChecked ? 'checked' : ''} class="mt-0.5 w-4 h-4 rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900 cursor-pointer">
+          <div class="space-y-0.5 w-full">
+            <div class="flex items-center justify-between">
+              <span class="text-[8px] font-bold text-white bg-zinc-900 px-1.5 py-0.5 rounded">Jour ${day}</span>
+              <span class="text-[9px] text-zinc-400">Outils gratuits</span>
+            </div>
+            <h4 class="font-bold text-zinc-900 text-xs ${isChecked ? 'line-through text-zinc-400' : ''}">${title}</h4>
+            <p class="text-[10px] text-zinc-500">${lesson}</p>
+          </div>
+        `;
+        container.appendChild(item);
+      }
+
+      updateCalendarProgressUI(biz.id);
+    }
+
+    function toggleTaskProgress(bizId, day, isChecked) {
+      const savedTasks = JSON.parse(localStorage.getItem(`lance_tasks_${bizId}`) || '{}');
+      if (isChecked) savedTasks[day] = true;
+      else delete savedTasks[day];
+
+      localStorage.setItem(`lance_tasks_${bizId}`, JSON.stringify(savedTasks));
+      renderCalendarForBusiness(selectedBusiness);
+      updateDashboardUI();
+    }
+
+    function updateCalendarProgressUI(bizId) {
+      const savedTasks = JSON.parse(localStorage.getItem(`lance_tasks_${bizId}`) || '{}');
+      const checkedCount = Object.keys(savedTasks).length;
+      const percent = Math.round((checkedCount / 30) * 100);
+
+      const percentEl = document.getElementById('calendar-progress-percent');
+      const dashCompletedEl = document.getElementById('dash-completed-tasks');
+
+      if (percentEl) percentEl.innerText = `${percent}%`;
+      if (dashCompletedEl) dashCompletedEl.innerText = `${checkedCount} / 30 Validées`;
+    }
+
+    // DASHBOARD & CRM HELPERS
+    function updateDashboardUI() {
+      const savedTasks = JSON.parse(localStorage.getItem(`lance_tasks_${selectedBusiness?.id || 'b1'}`) || '{}');
+      const checkedCount = Object.keys(savedTasks).length;
+
+      const dashTasksEl = document.getElementById('dash-completed-tasks');
+      if (dashTasksEl) dashTasksEl.innerText = `${checkedCount} / 30 Tâches`;
+
+      const revEl = document.getElementById('total-revenue-display');
+      if (revEl) revEl.innerText = `${userRevenue.toFixed(2)} €`;
+
+      renderProspectsList();
+    }
+
+    function addNewProspectPrompt() {
+      const name = prompt("Nom du prospect ou de l'entreprise :");
+      if (!name) return;
+      userProspects.push({ id: Date.now(), name: name, status: 'Contacté' });
+      localStorage.setItem('lance_prospects', JSON.stringify(userProspects));
+      renderProspectsList();
+    }
+
+    function renderProspectsList() {
+      const container = document.getElementById('prospects-list-container');
+      if (!container) return;
+
+      if (userProspects.length === 0) {
+        container.innerHTML = `<p class="text-[10px] text-zinc-400 text-center py-2">Aucun prospect enregistré.</p>`;
+        return;
+      }
+
+      container.innerHTML = userProspects.map(p => `
+        <div class="flex items-center justify-between p-2 bg-zinc-50 rounded-lg border border-zinc-200">
+          <span class="font-bold text-zinc-800">${p.name}</span>
+          <span class="text-[9px] bg-zinc-200 text-zinc-700 font-bold px-2 py-0.5 rounded">${p.status}</span>
+        </div>
+      `).join('');
+    }
+
+    function addRealRevenue() {
+      const input = document.getElementById('real-revenue-input');
+      const val = parseFloat(input.value);
+      if (isNaN(val) || val <= 0) return;
+
+      userRevenue += val;
+      localStorage.setItem('lance_revenue', userRevenue.toString());
+      input.value = '';
+      updateDashboardUI();
+    }
+
+    function resetAppProgress() {
+      if (confirm("Réinitialiser l'ensemble des réponses et de la progression ?")) {
+        localStorage.clear();
+        location.reload();
+      }
+    }
+  </script>
+</body>
+</html>
