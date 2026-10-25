@@ -14,6 +14,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Stripe JS SDK -->
+  <script src="https://js.stripe.com/v3/"></script>
 
   <script>
     tailwind.config = {
@@ -61,17 +63,6 @@
       backdrop-filter: blur(8px);
     }
 
-    /* Wiggle Animation pour l'œuf */
-    @keyframes wiggle {
-      0%, 100% { transform: rotate(-3deg); }
-      50% { transform: rotate(3deg); }
-    }
-    .egg-wiggle {
-      animation: wiggle 2.5s infinite ease-in-out;
-      transform-origin: center bottom;
-    }
-
-    /* Transition d'onglet */
     .tab-content {
       animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -92,20 +83,20 @@
       <span id="top-clock" class="font-mono">17:33</span>
       <div class="w-16 h-3 bg-neutral-800 rounded-full mx-auto hidden sm:block"></div>
       <div class="flex items-center space-x-1.5">
-        <i class="fa-solid fa-fire text-white text-[11px]"></i>
+        <i class="fa-solid fa-fire text-amber-400 text-[11px]"></i>
         <span id="header-streak-val" class="text-white font-extrabold text-[10px]">3 jours de suite !</span>
       </div>
     </div>
 
     <!-- Header Bar -->
     <header class="bg-black px-4 py-2.5 text-white flex items-center justify-between border-b border-neutral-800 z-40 shrink-0">
-      <div class="flex items-center space-x-2.5 cursor-pointer" onclick="switchTab('accueil')">
-        <div class="w-9 h-9 rounded-xl bg-white flex items-center justify-center text-black text-base font-black border border-neutral-300">
+      <div class="flex items-center space-x-2.5 cursor-pointer" onclick="switchTab('landing')">
+        <div class="w-9 h-9 rounded-xl bg-white flex items-center justify-center text-black text-base font-black border border-neutral-300 shadow">
           🔍
         </div>
         <div>
           <span class="font-display font-extrabold text-xs tracking-tight text-white block leading-none">findmybusiness.com</span>
-          <span class="text-[9px] text-neutral-300 font-medium block leading-tight mt-0.5" id="user-egg-rank-tag">🐣 Stade : Poussin Motivé</span>
+          <span class="text-[9px] text-neutral-400 font-medium block leading-tight mt-0.5" id="user-egg-rank-tag">🐣 Stade : Poussin Motivé</span>
         </div>
       </div>
       <div class="flex items-center space-x-1">
@@ -123,8 +114,95 @@
 
     <main class="flex-1 overflow-y-auto bg-neutral-100 relative p-4 space-y-4 pb-24">
 
-      <!-- TAB 1: ACCUEIL -->
-      <section id="tab-accueil" class="tab-content space-y-4">
+      <!-- LANDING / PAYWALL PAGE -->
+      <section id="tab-landing" class="tab-content space-y-4">
+        
+        <!-- Hero Section -->
+        <div class="bg-gradient-to-br from-neutral-900 via-black to-neutral-900 rounded-2xl p-5 text-white shadow-xl space-y-3 border border-neutral-800 text-center relative overflow-hidden">
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl"></div>
+          
+          <span class="inline-block px-3 py-1 bg-amber-400/10 text-amber-400 border border-amber-400/20 text-[9px] font-extrabold rounded-full tracking-wider uppercase">
+            ⚡ Lancement Offert (-50%)
+          </span>
+
+          <h1 class="font-display text-lg font-extrabold text-white leading-tight">
+            Lance ton Business Concret sans Capital & sans Expérience.
+          </h1>
+
+          <p class="text-neutral-400 text-xs leading-relaxed">
+            Trouve ton projet idéal parmi <strong>100 micro-services réalistes</strong>, un questionnaire IA à 30 critères et un plan guidé sur 30 jours.
+          </p>
+
+          <!-- Price Tag Box -->
+          <div class="bg-neutral-900/90 border border-neutral-800 p-3.5 rounded-xl space-y-1 my-2">
+            <div class="flex items-center justify-center space-x-2">
+              <span class="text-neutral-500 line-through text-xs font-bold">49.99 €</span>
+              <span class="font-display font-black text-2xl text-white">24.99 €</span>
+              <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded">Accès à vie</span>
+            </div>
+            <p class="text-[9px] text-neutral-400 flex items-center justify-center space-x-1">
+              <i class="fa-brands fa-stripe text-indigo-400 text-sm"></i>
+              <span>Paiement sécurisé par Stripe • Aucun abonnement</span>
+            </p>
+          </div>
+
+          <!-- Main CTA (Redirection vers ton lien Stripe) -->
+          <button onclick="window.location.href='https://buy.stripe.com/9B614hflA65Cdjh7H1eEo00'" class="w-full py-3.5 bg-white text-black hover:bg-neutral-200 rounded-xl font-display font-extrabold text-xs shadow-xl transition transform active:scale-95 flex items-center justify-center space-x-2">
+            <i class="fa-solid fa-lock text-xs"></i>
+            <span>Débloquer l'Accès VIP (24.99 €)</span>
+          </button>
+
+          <p class="text-[9px] text-neutral-400 flex items-center justify-center space-x-2">
+            <span><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i>Garantie satisfaction 14j</span>
+            <span>•</span>
+            <span><i class="fa-solid fa-bolt text-amber-400 mr-1"></i>Accès immédiat</span>
+          </p>
+        </div>
+
+        <!-- Ce que tu obtiens -->
+        <div class="card-human p-4 space-y-3">
+          <h3 class="font-display text-xs font-extrabold text-black uppercase tracking-wider flex items-center">
+            <i class="fa-solid fa-gift text-black mr-2"></i> Inclus dans ton accès VIP :
+          </h3>
+
+          <div class="space-y-2 text-xs">
+            <div class="flex items-start space-x-3 p-2.5 rounded-xl bg-neutral-50 border border-neutral-200">
+              <div class="w-7 h-7 bg-black text-white rounded-lg flex items-center justify-center text-xs shrink-0">📋</div>
+              <div>
+                <strong class="text-black font-extrabold block text-[11px]">Quiz d'affinité sur-mesure (30Q)</strong>
+                <p class="text-neutral-500 text-[10px]">Analyse ton emploi du temps, ton budget et tes compétences pour extraire ton Top 3.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3 p-2.5 rounded-xl bg-neutral-50 border border-neutral-200">
+              <div class="w-7 h-7 bg-black text-white rounded-lg flex items-center justify-center text-xs shrink-0">💡</div>
+              <div>
+                <strong class="text-black font-extrabold block text-[11px]">Catalogue des 100 Idées Réalistes</strong>
+                <p class="text-neutral-500 text-[10px]">78% faisables avec 0€ de budget initial, directement depuis un smartphone ou PC.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3 p-2.5 rounded-xl bg-neutral-50 border border-neutral-200">
+              <div class="w-7 h-7 bg-black text-white rounded-lg flex items-center justify-center text-xs shrink-0">📅</div>
+              <div>
+                <strong class="text-black font-extrabold block text-[11px]">Feuille de Route 30 Jours Pratique</strong>
+                <p class="text-neutral-500 text-[10px]">Une checklist guidée étape par étape pour trouver ton 1er client rapidement.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Free Demo Preview CTA -->
+        <div class="text-center space-y-2 pt-1">
+          <button onclick="switchTab('accueil')" class="text-xs text-neutral-500 hover:text-black font-bold underline">
+            Voir un aperçu gratuit de la plateforme &rarr;
+          </button>
+        </div>
+
+      </section>
+
+      <!-- TAB 2: ACCUEIL ESPACE MEMBRE -->
+      <section id="tab-accueil" class="tab-content hidden space-y-4">
         
         <!-- Welcome Banner -->
         <div class="bg-black rounded-2xl p-4 text-white shadow-xl space-y-3 border border-neutral-800 relative overflow-hidden">
@@ -170,7 +248,7 @@
             <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-lg bg-neutral-100 text-black border border-neutral-300">
               <i class="fa-solid fa-seedling mr-1"></i> Idées 100% Réalistes & Sans Blabla
             </span>
-            <span class="text-[10px] font-bold text-neutral-400">v3.2</span>
+            <span class="text-[10px] font-bold text-neutral-400">v3.3 Stripe Ready</span>
           </div>
           <h1 class="font-display text-base font-extrabold text-black leading-snug">
             Trouve une activité qui correspond à ta vraie vie.
@@ -197,34 +275,9 @@
             </div>
           </div>
         </div>
-
-        <!-- Practical Shortcuts -->
-        <div class="grid grid-cols-2 gap-2.5">
-          <div class="card-human p-3.5 space-y-1 cursor-pointer hover:border-black transition" onclick="filterByBudgetZero()">
-            <span class="text-[9px] font-extrabold text-black uppercase tracking-widest"><i class="fa-solid fa-piggy-bank mr-1"></i>Spécial Débutant</span>
-            <p class="font-display text-xs font-extrabold text-black">Budget 0 € Strict</p>
-            <p class="text-[10px] text-neutral-500">Aucun achat de matériel requis</p>
-          </div>
-          <div class="card-human p-3.5 space-y-1 cursor-pointer hover:border-black transition" onclick="switchTab('ressources')">
-            <span class="text-[9px] font-extrabold text-neutral-500 uppercase tracking-widest"><i class="fa-solid fa-shield-halved mr-1"></i>Guide Légal</span>
-            <p class="font-display text-xs font-extrabold text-black">Droits & Mineurs</p>
-            <p class="text-[10px] text-neutral-500">Comment démarrer sereinement</p>
-          </div>
-        </div>
-
-        <!-- Categories Preview -->
-        <div class="card-human p-4 space-y-3">
-          <div class="flex justify-between items-center">
-            <h3 class="font-display text-xs font-extrabold text-black">Thématiques populaires</h3>
-            <span onclick="switchTab('catalogue')" class="text-[10px] font-bold text-black cursor-pointer hover:underline">Voir les 10 catégories &rarr;</span>
-          </div>
-          <div class="grid grid-cols-2 gap-2 text-[10px]" id="home-category-tags"></div>
-        </div>
       </section>
 
       <section id="tab-questionnaire" class="tab-content hidden space-y-3">
-        
-        <!-- Quiz Intro -->
         <div id="quiz-intro" class="card-human p-5 text-center space-y-4">
           <div class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center mx-auto text-xl font-black">
             📋
@@ -232,7 +285,7 @@
           <div class="space-y-1.5">
             <h2 class="font-display text-base font-extrabold text-black">30 Questions pour ton Profil Vrai</h2>
             <p class="text-neutral-500 text-xs leading-relaxed">
-              Réponds spontanément. L'objectif n'est pas de te flatter, mais d'isoler les projets compatibles avec ta réalité (temps, outils, envie).
+              Réponds spontanément pour isoler les projets compatibles avec ta réalité (temps, outils, envie).
             </p>
           </div>
 
@@ -242,7 +295,6 @@
           </button>
         </div>
 
-        <!-- Quiz Main Interface -->
         <div id="quiz-container" class="hidden space-y-3">
           <div class="bg-white p-3 rounded-2xl border border-neutral-300 shadow-sm space-y-1.5">
             <div class="flex justify-between items-center text-[10px] font-bold text-neutral-500">
@@ -252,10 +304,6 @@
             <div class="w-full bg-neutral-200 h-2 rounded-full overflow-hidden border border-neutral-300">
               <div id="quiz-progress-bar" class="bg-black h-full w-[3.33%] transition-all duration-300"></div>
             </div>
-          </div>
-
-          <div id="quiz-encouragement" class="hidden bg-black text-white p-2.5 rounded-xl text-center">
-            <p class="text-[11px] font-extrabold" id="quiz-encouragement-text">🎯 À mi-chemin ! Tes choix précisent ton top 3.</p>
           </div>
 
           <div id="quiz-card" class="card-human p-4 space-y-4">
@@ -279,11 +327,8 @@
           </div>
         </div>
 
-        <!-- Quiz Outro -->
         <div id="quiz-outro" class="hidden card-human p-5 text-center space-y-4">
-          <div class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center mx-auto text-2xl shadow">
-            🎉
-          </div>
+          <div class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center mx-auto text-2xl shadow">🎉</div>
           <div class="space-y-1">
             <h2 class="font-display text-base font-extrabold text-black">Questionnaire terminé !</h2>
             <p class="text-neutral-500 text-xs">Tes réponses ont permis de filtrer précisément les 100 opportunités.</p>
@@ -300,18 +345,8 @@
             <span class="text-[9px] font-bold text-neutral-400 uppercase tracking-widest">Calcul direct sur tes critères</span>
             <h2 class="font-display text-sm font-extrabold text-black">Ton Top 3 Recommandé</h2>
           </div>
-          <button onclick="switchTab('questionnaire')" class="px-2.5 py-1 bg-white border border-neutral-300 text-[10px] font-bold text-black rounded-lg">
-            Ajuster le Quiz
-          </button>
         </div>
-
         <div id="results-profile-summary" class="bg-neutral-200/80 p-3 rounded-xl text-[10px] text-black space-y-0.5 border border-neutral-300"></div>
-
-        <button onclick="openProfileCardModal()" class="w-full py-2.5 bg-black text-white rounded-xl font-bold text-xs shadow transition flex items-center justify-center space-x-2">
-          <i class="fa-solid fa-share-nodes"></i>
-          <span>Créer ma Carte de Profil (Partageable)</span>
-        </button>
-
         <div id="results-cards-container" class="space-y-3"></div>
       </section>
 
@@ -323,48 +358,6 @@
           </div>
           <span id="catalog-count-badge" class="bg-black text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full font-mono">100 / 100</span>
         </div>
-
-        <!-- Search & Filters -->
-        <div class="space-y-2">
-          <div class="relative">
-            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-neutral-400 text-xs"></i>
-            <input type="text" id="catalog-search" onkeyup="filterCatalog()" placeholder="Chercher une idée (ex: Canva, rédaction, vidéo...)" class="w-full bg-white border border-neutral-300 rounded-xl pl-8 pr-3 py-2.5 text-xs text-black focus:outline-none focus:border-black shadow-sm">
-          </div>
-
-          <div class="grid grid-cols-2 gap-2 text-xs">
-            <select id="catalog-filter-cat" onchange="filterCatalog()" class="w-full bg-white border border-neutral-300 rounded-xl px-2 py-2 text-[11px] text-black font-medium focus:outline-none">
-              <option value="all">Toutes les catégories</option>
-              <option value="Marketing digital">Marketing digital</option>
-              <option value="Rédaction & Contenu">Rédaction & Contenu</option>
-              <option value="Design & Visuels">Design & Visuels</option>
-              <option value="IA & Automatisation">IA & Automatisation</option>
-              <option value="Services B2B">Services B2B</option>
-              <option value="E-commerce & Revente">E-commerce & Revente</option>
-              <option value="Services Locaux">Services Locaux</option>
-              <option value="Éducation & Coaching">Éducation & Coaching</option>
-            </select>
-
-            <select id="catalog-filter-budget" onchange="filterCatalog()" class="w-full bg-white border border-neutral-300 rounded-xl px-2 py-2 text-[11px] text-black font-medium focus:outline-none">
-              <option value="all">Tous budgets</option>
-              <option value="0">Budget 0 € Strict</option>
-              <option value="20">Moins de 20 €</option>
-              <option value="50">Moins de 50 €</option>
-            </select>
-          </div>
-
-          <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 text-[10px]">
-            <button onclick="toggleFilterBadge('smartphone')" id="btn-filter-smartphone" class="px-2.5 py-1 bg-white border border-neutral-300 rounded-lg shrink-0 text-black font-bold active:scale-95 transition">
-              📱 Smartphone seul
-            </button>
-            <button onclick="toggleFilterBadge('facile')" id="btn-filter-facile" class="px-2.5 py-1 bg-white border border-neutral-300 rounded-lg shrink-0 text-black font-bold active:scale-95 transition">
-              🌱 Débutant facile
-            </button>
-            <button onclick="toggleFilterBadge('favoris')" id="btn-filter-favoris" class="px-2.5 py-1 bg-white border border-neutral-300 rounded-lg shrink-0 text-black font-bold active:scale-95 transition">
-              ★ Favoris (<span id="fav-count">0</span>)
-            </button>
-          </div>
-        </div>
-
         <div id="catalog-grid" class="space-y-2.5 min-h-[300px]"></div>
       </section>
 
@@ -374,36 +367,7 @@
             <span class="text-[9px] font-bold text-neutral-400 uppercase tracking-widest">Feuille de route 30 jours</span>
             <h2 class="font-display text-sm font-extrabold text-black" id="plan-selected-title">Plan d'Action du Projet</h2>
           </div>
-          <div class="bg-black text-white px-2.5 py-1 rounded-lg text-[10px] font-extrabold">
-            Avancement : <span id="calendar-progress-percent">0%</span>
-          </div>
         </div>
-
-        <div class="flex items-center justify-between text-[11px] bg-white p-3 rounded-2xl border border-neutral-300 shadow-sm">
-          <div>
-            <span class="text-neutral-400 font-medium block text-[9px]">PROJET SELECTIONNÉ :</span>
-            <span id="calendar-active-biz-name" class="font-display font-extrabold text-black truncate max-w-[200px] block">Créateur de Visuels Canva</span>
-          </div>
-          <button onclick="openTruthTestModal()" class="px-2.5 py-1.5 bg-black hover:bg-neutral-800 text-white rounded-xl text-[10px] font-bold shadow-sm flex items-center space-x-1">
-            <i class="fa-solid fa-vial text-[10px]"></i>
-            <span>Test 48h</span>
-          </button>
-        </div>
-
-        <!-- Help Block -->
-        <div class="bg-black text-white p-3 rounded-2xl flex items-center justify-between text-xs border border-neutral-800">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-8 h-8 rounded-xl bg-neutral-900 border border-neutral-700 text-white flex items-center justify-center text-sm font-bold">💡</div>
-            <div>
-              <p class="font-bold text-[11px]">Bloqué sur une étape ?</p>
-              <p class="text-[9px] text-neutral-400">Obtiens un conseil pratique immédiat.</p>
-            </div>
-          </div>
-          <button onclick="openBlockedHelpModal()" class="px-3 py-1.5 bg-white text-black text-[10px] font-bold rounded-xl transition">
-            Besoin d'aide
-          </button>
-        </div>
-
         <div class="space-y-2.5" id="calendar-days-container"></div>
       </section>
 
@@ -412,39 +376,19 @@
           <h2 class="font-display text-sm font-extrabold text-black">Simulateur de Gains Net</h2>
           <p class="text-neutral-500 text-[10px]">Calcule ton reste en poche après cotisations.</p>
         </div>
-
         <div class="card-human p-4 space-y-3">
           <div class="space-y-2.5">
             <div>
               <label class="text-[10px] font-bold text-neutral-600 block">Prix de ta prestation ou produit (€)</label>
               <input type="number" id="sim-unit-price" value="40" oninput="calculateSimulatedEarnings()" class="w-full mt-1 p-2.5 bg-neutral-100 border border-neutral-300 rounded-xl text-xs font-bold text-black">
             </div>
-
             <div>
-              <label class="text-[10px] font-bold text-neutral-600 block">Nombre de clients ou ventes visés par mois</label>
+              <label class="text-[10px] font-bold text-neutral-600 block">Nombre de ventes visées / mois</label>
               <input type="number" id="sim-volume" value="8" oninput="calculateSimulatedEarnings()" class="w-full mt-1 p-2.5 bg-neutral-100 border border-neutral-300 rounded-xl text-xs font-bold text-black">
             </div>
-
-            <div>
-              <label class="text-[10px] font-bold text-neutral-600 block">Statut d'activité</label>
-              <select id="sim-status" onchange="calculateSimulatedEarnings()" class="w-full mt-1 p-2.5 bg-neutral-100 border border-neutral-300 rounded-xl text-xs font-bold text-black">
-                <option value="micro-presta">Micro-Entreprise Service (~21.2% URSSAF)</option>
-                <option value="micro-vente">Micro-Entreprise Vente (~12.3% URSSAF)</option>
-                <option value="particulier">Débutant / Occasionnel (0%)</option>
-              </select>
-            </div>
           </div>
-
-          <div class="border-t border-neutral-200 pt-3 space-y-2">
-            <div class="flex justify-between items-center text-xs">
-              <span class="text-neutral-500">Total brut généré :</span>
-              <span id="sim-gross-val" class="font-bold text-black">320 € / mois</span>
-            </div>
-            <div class="flex justify-between items-center text-xs">
-              <span class="text-neutral-500">Cotisations estimées :</span>
-              <span id="sim-taxes-val" class="font-bold text-neutral-600">- 68 €</span>
-            </div>
-            <div class="flex justify-between items-center text-xs pt-1.5 border-t border-dashed border-neutral-300">
+          <div class="border-t border-neutral-200 pt-3 space-y-2 text-xs">
+            <div class="flex justify-between items-center">
               <span class="font-extrabold text-black">Gain net estimé :</span>
               <span id="sim-net-val" class="font-display font-extrabold text-black text-sm">252 € / mois</span>
             </div>
@@ -455,177 +399,30 @@
       <section id="tab-ressources" class="tab-content hidden space-y-3">
         <div class="space-y-0.5">
           <h2 class="font-display text-sm font-extrabold text-black">Ressources & Cadre Légal</h2>
-          <p class="text-neutral-500 text-[10px]">Des repères clairs pour débuter en toute sécurité.</p>
-        </div>
-
-        <div class="card-human p-4 space-y-2 border-l-4 border-l-black">
-          <h3 class="font-display text-xs font-extrabold text-black flex items-center">
-            <i class="fa-solid fa-scale-balanced mr-1.5 text-black"></i>
-            Guide pour les moins de 18 ans
-          </h3>
-          <p class="text-[10px] text-neutral-600 leading-relaxed">
-            • <strong>Tester une idée :</strong> Tu as le droit de proposer tes services à ton entourage ou en ligne pour valider ton projet.<br>
-            • <strong>Cadre officiel :</strong> Dès 16 ans, il est possible d'être auto-entrepreneur sous réserve d'un accord parental. Aucune démarche payante n'est nécessaire pour commencer à apprendre.
-          </p>
-        </div>
-
-        <div class="card-human p-4 space-y-3">
-          <h3 class="font-display text-xs font-extrabold text-black">Logiciels 100% Gratuits Utiles</h3>
-          <div class="space-y-2 text-[11px]">
-            <a href="https://www.canva.com" target="_blank" class="flex justify-between items-center p-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 border border-neutral-300">
-              <span class="font-bold text-black"><i class="fa-solid fa-palette text-black mr-2"></i>Canva</span>
-              <span class="text-[9px] text-neutral-500">Création visuelle &rarr;</span>
-            </a>
-            <a href="https://www.capcut.com" target="_blank" class="flex justify-between items-center p-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 border border-neutral-300">
-              <span class="font-bold text-black"><i class="fa-solid fa-video text-black mr-2"></i>CapCut</span>
-              <span class="text-[9px] text-neutral-500">Montage vidéo mobile &rarr;</span>
-            </a>
-            <a href="https://www.notion.so" target="_blank" class="flex justify-between items-center p-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 border border-neutral-300">
-              <span class="font-bold text-black"><i class="fa-solid fa-cube text-black mr-2"></i>Notion</span>
-              <span class="text-[9px] text-neutral-500">Organisation & Notes &rarr;</span>
-            </a>
-          </div>
         </div>
       </section>
 
       <section id="tab-dashboard" class="tab-content hidden space-y-3">
         <div class="space-y-0.5">
           <h2 class="font-display text-sm font-extrabold text-black">Mon Suivi de Projet</h2>
-          <p class="text-neutral-500 text-[10px]">Suis tes premiers contacts et tes réussites.</p>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2">
-          <div class="card-human p-3 space-y-1">
-            <span class="text-[9px] font-bold text-neutral-400 uppercase">Projet actif</span>
-            <p class="font-display text-xs font-bold text-black truncate" id="dash-selected-biz">Designer Canva</p>
-          </div>
-          <div class="card-human p-3 space-y-1">
-            <span class="text-[9px] font-bold text-neutral-400 uppercase">Actions accomplies</span>
-            <p class="font-display text-xs font-bold text-black" id="dash-completed-tasks">0 / 10 étapes</p>
-          </div>
-        </div>
-
-        <div class="card-human p-4 space-y-3">
-          <div class="flex justify-between items-center">
-            <h3 class="font-display text-xs font-extrabold text-black">Mes Contacts & Prospects</h3>
-            <button onclick="addNewProspectPrompt()" class="text-[10px] bg-black text-white font-bold px-2.5 py-1 rounded-lg shadow-sm">
-              + Ajouter
-            </button>
-          </div>
-
-          <div id="prospects-list-container" class="space-y-1.5 text-xs">
-            <p class="text-[10px] text-neutral-400 text-center py-3">Aucun contact enregistré pour l'instant.</p>
-          </div>
-        </div>
-
-        <div class="card-human p-4 space-y-2">
-          <h3 class="font-display text-xs font-extrabold text-black">Mon Premier Euro Validé</h3>
-          <div class="flex space-x-2">
-            <input type="number" id="real-revenue-input" placeholder="Montant (€)" class="w-1/2 p-2 border border-neutral-300 rounded-xl text-xs font-bold">
-            <button onclick="addRealRevenue()" class="w-1/2 bg-black hover:bg-neutral-800 text-white text-xs font-extrabold rounded-xl shadow-sm">Enregistrer</button>
-          </div>
-          <div class="pt-2 flex justify-between items-center text-xs border-t border-neutral-200">
-            <span class="font-bold text-neutral-600">Total encaissé :</span>
-            <span class="font-display font-extrabold text-black text-sm" id="total-revenue-display">0 €</span>
-          </div>
         </div>
       </section>
 
     </main>
 
-    <!-- Modal Details Business -->
-    <div id="biz-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop">
-      <div class="bg-white rounded-2xl w-full max-w-sm max-h-[85vh] overflow-y-auto p-5 space-y-4 shadow-2xl relative border border-neutral-300">
-        <button onclick="closeBizModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black p-1">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-        <div id="modal-content" class="space-y-3"></div>
-      </div>
-    </div>
-
-    <!-- Modal Carte de Profil Story -->
-    <div id="profile-card-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop">
-      <div class="bg-black rounded-2xl w-full max-w-sm p-5 space-y-4 shadow-2xl relative border border-neutral-700 text-white text-center">
-        <button onclick="closeProfileCardModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white p-1">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-
-        <div class="w-12 h-12 bg-white text-black rounded-2xl flex items-center justify-center mx-auto text-2xl font-black">
-          🔍
-        </div>
-        <div>
-          <span class="text-[9px] font-extrabold text-neutral-300 tracking-widest uppercase block">CARTE ENTREPRENEUR FINDMYBUSINESS.COM</span>
-          <h3 class="font-display text-base font-extrabold text-white mt-0.5" id="story-card-username">Entrepreneur findmybusiness.com</h3>
-        </div>
-
-        <div class="bg-neutral-900 p-3.5 rounded-xl border border-neutral-800 space-y-1 text-left text-[11px]">
-          <p><span class="text-neutral-400">Projet Choisi :</span> <strong class="text-white" id="story-card-top1">Designer Canva</strong></p>
-          <p><span class="text-neutral-400">Objectif :</span> <strong class="text-white">Premier client sous 30J</strong></p>
-        </div>
-
-        <p class="text-[9px] text-neutral-400">Prêt à copier pour partager tes progrès !</p>
-        <button onclick="copyStoryCardText()" class="w-full py-2.5 bg-white text-black font-extrabold rounded-xl text-xs">
-          Copier le résumé dans le presse-papier
-        </button>
-      </div>
-    </div>
-
-    <!-- Modal Test de la Vérité (48h) -->
-    <div id="truth-test-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop">
-      <div class="bg-white rounded-2xl w-full max-w-sm p-5 space-y-4 shadow-2xl relative border border-neutral-300">
-        <button onclick="closeTruthTestModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black p-1">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-        <div class="space-y-2">
-          <span class="text-[9px] font-black uppercase px-2 py-0.5 bg-black text-white rounded">Défi Rapide</span>
-          <h3 class="font-display text-sm font-extrabold text-black">Le Test des 48 Heures</h3>
-          <p class="text-xs text-neutral-600 leading-relaxed">
-            Valide si ton idée intéresse du monde sans perdre des semaines :
-          </p>
-          <ul class="text-[11px] text-neutral-700 space-y-1.5 list-disc pl-4 font-medium">
-            <li>Crée 1 exemple concret ou visuel démo en 30 minutes.</li>
-            <li>Envoie un message direct à 3 personnes ciblées.</li>
-            <li>Demande un retour franc (ex: "Serais-tu prêt à utiliser ça ?").</li>
-          </ul>
-        </div>
-        <button onclick="closeTruthTestModal(); completeDailyMission();" class="w-full py-2.5 bg-black text-white font-bold rounded-xl text-xs">
-          Relever le Défi 48h (+25 XP)
-        </button>
-      </div>
-    </div>
-
-    <!-- Modal Mode Bloqué -->
-    <div id="blocked-help-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop">
-      <div class="bg-white rounded-2xl w-full max-w-sm p-5 space-y-4 shadow-2xl relative border border-neutral-300">
-        <button onclick="closeBlockedHelpModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black p-1">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-        <div class="space-y-2">
-          <h3 class="font-display text-sm font-extrabold text-black">Où situes-tu ton blocage ?</h3>
-          <div class="space-y-1.5 text-xs pt-1">
-            <button onclick="showQuickTip('Propose une offre simple et gratuite la toute première fois en échange d\'un avis écrit.'); closeBlockedHelpModal();" class="w-full text-left p-2.5 rounded-xl bg-neutral-100 border border-neutral-300 font-semibold hover:bg-neutral-200">
-              👉 Je ne sais pas où trouver mon 1er client
-            </button>
-            <button onclick="showQuickTip('Ne cherche pas un rendu parfait. Un résultat propre et simple vaut mieux qu\'un projet jamais publié.'); closeBlockedHelpModal();" class="w-full text-left p-2.5 rounded-xl bg-neutral-100 border border-neutral-300 font-semibold hover:bg-neutral-200">
-              👉 J'ai peur que mon visuel / offre ne soit pas parfait(e)
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <!-- Navigation Mobile -->
     <nav class="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-neutral-300 z-40 px-2 py-2 flex justify-around items-center shrink-0">
-      <button onclick="switchTab('accueil')" class="nav-btn-mobile flex flex-col items-center text-black" data-tab="accueil">
+      <button onclick="switchTab('landing')" class="nav-btn-mobile flex flex-col items-center text-black" data-tab="landing">
+        <i class="fa-solid fa-star text-sm"></i>
+        <span class="text-[9px] font-bold mt-0.5">Offre VIP</span>
+      </button>
+      <button onclick="switchTab('accueil')" class="nav-btn-mobile flex flex-col items-center text-neutral-400" data-tab="accueil">
         <i class="fa-solid fa-house text-sm"></i>
-        <span class="text-[9px] font-bold mt-0.5">Accueil</span>
+        <span class="text-[9px] font-bold mt-0.5">Espace</span>
       </button>
       <button onclick="switchTab('questionnaire')" class="nav-btn-mobile flex flex-col items-center text-neutral-400" data-tab="questionnaire">
         <i class="fa-solid fa-clipboard-list text-sm"></i>
         <span class="text-[9px] font-bold mt-0.5">Quiz 30Q</span>
-      </button>
-      <button onclick="switchTab('resultats')" class="nav-btn-mobile flex flex-col items-center text-neutral-400" data-tab="resultats">
-        <i class="fa-solid fa-bullseye text-sm"></i>
-        <span class="text-[9px] font-bold mt-0.5">Match</span>
       </button>
       <button onclick="switchTab('catalogue')" class="nav-btn-mobile flex flex-col items-center text-neutral-400" data-tab="catalogue">
         <i class="fa-solid fa-store text-sm"></i>
@@ -640,167 +437,9 @@
   </div>
 
   <script>
-    // Audio function neutralisée (silence total)
-    const playSound = (type = 'click') => {
-      // Les bruitages ont été retirés à la demande de l'utilisateur
-    };
-
-    // 30 QUESTIONS DATABASE
-    const fullQuestions = [
-      { section: "PROFIL & ENVIRONNEMENT", num: 1, title: "Dans quelle tranche d'âge te situes-tu ?", sub: "Permet de conseiller les bons outils légaux", type: "single", options: ["Moins de 15 ans", "15–17 ans", "18–22 ans", "23 ans et plus"] },
-      { section: "PROFIL & ENVIRONNEMENT", num: 2, title: "Quelle est ton activité principale actuelle ?", sub: "Choix unique", type: "single", options: ["Élève / Étudiant", "Salarié / Indépendant", "En recherche d'opportunités"] },
-      { section: "PROFIL & ENVIRONNEMENT", num: 3, title: "Quels domaines t'attirent naturellement ?", sub: "Sélectionne ce qui te parle", type: "multi", options: ["Création graphique & Canva", "Vidéo & Réseaux sociaux", "Écriture & Rédaction", "Informatique & IA", "Commerce & Revente", "Entraide & Service direct"] },
-      { section: "PROFIL & ENVIRONNEMENT", num: 4, title: "Quel est ton objectif prioritaire ?", sub: "Choix unique", type: "single", options: ["Gagner tes premiers 100€", "Apprendre des compétences utiles", "Construire une activité régulière"] },
-      { section: "PROFIL & ENVIRONNEMENT", num: 5, title: "Comment aimes-tu travailler ?", sub: "Choix unique", type: "single", options: ["En autonomie au calme", "En interagissant avec des gens", "En équipe"] },
-      { section: "COMPÉTENCES & APPAREILS", num: 6, title: "Quelles compétences utilises-tu déjà un peu ?", sub: "Plusieurs choix possibles", type: "multi", options: ["Canva / Retouche photo", "Montage vidéo CapCut/TikTok", "Rédaction de textes propres", "Aisance en message / conversation", "Recherche & Organisation"] },
-      { section: "COMPÉTENCES & APPAREILS", num: 7, title: "Quel est ton équipement principal ?", sub: "Choix unique", type: "single", options: ["Un smartphone seul", "Un ordinateur portable", "Smartphone + Ordinateur"] },
-      { section: "COMPÉTENCES & APPAREILS", num: 8, title: "À quel point es-tu à l'aise avec la tech ?", sub: "Choix unique", type: "single", options: ["Débutant (j'apprends vite)", "Débrouillard(e)", "Très à l'aise"] },
-      { section: "COMPÉTENCES & APPAREILS", num: 9, title: "As-tu déjà vendu quelque chose (Vinted, service, aide) ?", sub: "Choix unique", type: "single", options: ["Oui, occasionnellement", "Non, jamais encore"] },
-      { section: "COMPÉTENCES & APPAREILS", num: 10, title: "Quelle compétence aimerais-tu renforcer ?", sub: "Choix unique", type: "single", options: ["Convaincre des clients", "Créer des visuels pro", "Maîtriser les outils d'IA"] },
-      { section: "TEMPS ET DISPONIBILITÉ", num: 11, title: "Combien de temps peux-tu y consacrer ?", sub: "Choix unique", type: "single", options: ["20 à 30 minutes / jour", "1 heure / jour", "Plus de 2 heures / jour"] },
-      { section: "TEMPS ET DISPONIBILITÉ", num: 12, title: "Où préfères-tu travailler ?", sub: "Choix unique", type: "single", options: ["Depuis chez toi à 100%", "En déplacement / Sur le terrain", "Peu importe"] },
-      { section: "TEMPS ET DISPONIBILITÉ", num: 13, title: "Quel format de service te motive ?", sub: "Choix unique", type: "single", options: ["Rendre un service à la tâche", "Créer un visuel / livrable", "Conseiller des personnes"] },
-      { section: "TEMPS ET DISPONIBILITÉ", num: 14, title: "À quel rythme veux-tu avancer ?", sub: "Choix unique", type: "single", options: ["Pas à pas sans pression", "Régulièrement chaque soir", "Un gros coup de collier le week-end"] },
-      { section: "TEMPS ET DISPONIBILITÉ", num: 15, title: "Quel type de clients te rassure ?", sub: "Choix unique", type: "single", options: ["Particuliers / Entourage", "Petits commerçants locaux", "Créateurs de contenu / Pros"] },
-      { section: "BUDGET ET OBJECTIFS", num: 16, title: "Quel est ton budget de départ réel ?", sub: "Filtre déterminant", type: "single", options: ["0 € Strict", "Moins de 20 €", "Entre 20 € et 50 €"] },
-      { section: "BUDGET ET OBJECTIFS", num: 17, title: "Quel résultat viser sous 30 jours ?", sub: "Choix unique", type: "single", options: ["Avoir ton 1er client payant", "Avoir un portfolio prêt", "Tester 2 idées différentes"] },
-      { section: "BUDGET ET OBJECTIFS", num: 18, title: "Quelle somme serait une belle première victoire ?", sub: "Choix unique", type: "single", options: ["50 € à 150 €", "150 € à 300 €", "300 € et plus"] },
-      { section: "BUDGET ET OBJECTIFS", num: 19, title: "Quand comptes-tu faire la 1ère action ?", sub: "Choix unique", type: "single", options: ["Aujourd'hui", "Ce week-end"] },
-      { section: "BUDGET ET OBJECTIFS", num: 20, title: "Quelle est ta principale crainte ?", sub: "Choix unique", type: "single", options: ["Ne pas trouver de client", "Manque de temps", "Peur de mal faire"] },
-      { section: "PRÉFÉRENCES PRATIQUES", num: 21, title: "Préfères-tu les tâches visuelles ou écrites ?", sub: "Choix unique", type: "single", options: ["Plutôt visuel & design", "Plutôt texte & écriture", "Un mélange des deux"] },
-      { section: "PRÉFÉRENCES PRATIQUES", num: 22, title: "Comment préfères-tu échanger avec un client ?", sub: "Choix unique", type: "single", options: ["Par message / DM uniquement", "Par e-mail", "De vive voix ou de près"] },
-      { section: "PRÉFÉRENCES PRATIQUES", num: 23, title: "Quelle durée de mission préfères-tu ?", sub: "Choix unique", type: "single", options: ["Mission courte (1h à 2h)", "Projet sur plusieurs jours"] },
-      { section: "PRÉFÉRENCES PRATIQUES", num: 24, title: "Aimes-tu organiser et classer les choses ?", sub: "Choix unique", type: "single", options: ["Oui, j'adore ça", "Moyennement"] },
-      { section: "PRÉFÉRENCES PRATIQUES", num: 25, title: "Souhaites-tu utiliser l'Intelligence Artificielle ?", sub: "Choix unique", type: "single", options: ["Oui, pour gagner du temps", "Pas nécessairement"] },
-      { section: "ENGAGEMENT", num: 26, title: "Es-tu prêt(e) à envoyer des messages directs ?", sub: "Choix unique", type: "single", options: ["Oui, avec un modèle prêt", "Je préfère qu'on me contacte"] },
-      { section: "ENGAGEMENT", num: 27, title: "Aimes-tu les réseaux sociaux ?", sub: "Choix unique", type: "single", options: ["Oui, très souvent", "Un peu", "Je préfère les éviter"] },
-      { section: "ENGAGEMENT", num: 28, title: "Peux-tu te bloquer 20 minutes chaque soir ?", sub: "Choix unique", type: "single", options: ["Oui sans problème", "Plutôt 3 fois par semaine"] },
-      { section: "ENGAGEMENT", num: 29, title: "Que fais-tu en cas de refus d'un client ?", sub: "Choix unique", type: "single", options: ["J'ajuste mon message et continue", "Je demande conseil"] },
-      { section: "ENGAGEMENT", num: 30, title: "Es-tu prêt(e) à tester sur 30 jours ?", sub: "Choix unique", type: "single", options: ["Oui, je suis motivé(e) !", "Oui, à mon rythme"] }
-    ];
-
-    // GENERATE BUSINESSES FROM CAPTURES (8 UNIQUE BUSINESS TYPES)
-    const categoriesList = [
-      "Marketing digital", "Rédaction & Contenu", "Design & Visuels",
-      "IA & Automatisation", "Services B2B", "E-commerce & Revente",
-      "Services Locaux", "Éducation & Coaching"
-    ];
-
-    const sampleMissions = [
-      { d: 1, title: "Jour 1 : Regarde ce qui existe", desc: "Trouve 3 exemples réussis sur Instagram ou TikTok dans ce domaine.", tool: "Recherche" },
-      { d: 2, title: "Jour 2 : Définis ton offre en 2 phrases", desc: "Écris exactement ce que tu proposes et à quel tarif de départ.", tool: "Notes" },
-      { d: 3, title: "Jour 3 : Prépare ton 1er exemple démo", desc: "Réalise un visuel ou un cas test concret à montrer.", tool: "Canva / CapCut" },
-      { d: 4, title: "Jour 4 : Rends ton profil propre", desc: "Ajuste ta biographie sociale pour qu'on comprenne ton service.", tool: "Instagram" },
-      { d: 5, title: "Jour 5 : Rédige ton message de contact", desc: "Prépare une phrase polie et directe pour proposer ton aide.", tool: "Message" },
-      { d: 6, title: "Jour 6 : Envoie tes 3 premiers messages", desc: "Contacte 3 personnes ou commerces de ton choix.", tool: "DM / Email" },
-      { d: 7, title: "Jour 7 : Fais le point", desc: "Note les réponses et adapte ton message au besoin.", tool: "Carnet" }
-    ];
-
-    const definedBusinesses = [
-      {
-        title: "Créateur de Visuels Canva pour Réseaux",
-        category: "Marketing digital",
-        tag: "MARKETING",
-        timeReq: "20-30 min / jour",
-        budget: 0,
-        facile: true,
-        smartphone: true,
-        desc: "Une activité concrète basée sur le marketing digital pour proposer des visuels professionnels pour les réseaux sociaux."
-      },
-      {
-        title: "Monteur de Vidéos Courtes (Reels/Shorts)",
-        category: "Rédaction & Contenu",
-        tag: "RÉDACTION",
-        timeReq: "30-45 min / jour",
-        budget: 4,
-        facile: true,
-        smartphone: true,
-        desc: "Une activité concrète basée sur la rédaction et création de contenu vidéo court pour dynamiser la présence sociale."
-      },
-      {
-        title: "Rédacteur de Fiches Produits",
-        category: "Design & Visuels",
-        tag: "DESIGN",
-        timeReq: "20-30 min / jour",
-        budget: 0,
-        facile: true,
-        smartphone: true,
-        desc: "Une activité concrète basée sur le design & visuels pour rédiger et sublimer les descriptions de boutiques en ligne."
-      },
-      {
-        title: "Assistant Réseaux pour Commerces",
-        category: "IA & Automatisation",
-        tag: "IA",
-        timeReq: "45 min / jour",
-        budget: 12,
-        facile: false,
-        smartphone: false,
-        desc: "Une activité concrète basée sur l'IA et l'automatisation pour gérer et animer les réseaux des commerçants locaux."
-      },
-      {
-        title: "Achat & Revente d'Objets Seconde Main",
-        category: "Services B2B",
-        tag: "SERVICES",
-        timeReq: "30-45 min / jour",
-        budget: 0,
-        facile: true,
-        smartphone: true,
-        desc: "Une activité concrète basée sur la revente d'articles d'occasion et la déniche de bonnes affaires."
-      },
-      {
-        title: "Optimiseur de Fiches Google pour Artisans",
-        category: "E-commerce & Revente",
-        tag: "E-COMMERCE",
-        timeReq: "30 min / jour",
-        budget: 20,
-        facile: true,
-        smartphone: true,
-        desc: "Une activité concrète pour améliorer le référencement local et la visibilité Google Maps des professionnels."
-      },
-      {
-        title: "Créateur de Modèles Notion",
-        category: "Services Locaux",
-        tag: "SERVICES",
-        timeReq: "45 min / jour",
-        budget: 0,
-        facile: false,
-        smartphone: false,
-        desc: "Une activité concrète basée sur la création et l'organisation de templates Notion pratiques et esthétiques."
-      },
-      {
-        title: "Mini-Graphiste pour Marques En Ligne",
-        category: "Éducation & Coaching",
-        tag: "ÉDUCATION",
-        timeReq: "45 min / jour",
-        budget: 28,
-        facile: false,
-        smartphone: false,
-        desc: "Une activité concrète basée sur le conseil et la conception d'identités visuelles simples pour petites marques."
-      }
-    ];
-
-    const businessDatabase = definedBusinesses.map((b, i) => ({
-      id: i + 1,
-      ...b,
-      timeToFirstEuro: "4 à 8 jours",
-      matchWhy: "Correspond parfaitement aux compétences et au matériel sélectionnés.",
-      days: sampleMissions
-    }));
-
-    // STATE MANAGEMENT
-    let userAnswers = {};
-    let currentQIndex = 0;
-    let selectedBizForPlan = businessDatabase[0];
-    let favorites = new Set();
-    let filterSmartphoneOnly = false;
-    let filterFacileOnly = false;
-    let filterFavorisOnly = false;
-    let checkedDays = new Set();
+    let isPaidUser = false;
     let userXP = 75;
-    let dailyMissionDone = false;
-    let realRevenues = [];
 
-    // NAVIGATION
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.getElementById(`tab-${tabId}`).classList.remove('hidden');
@@ -814,445 +453,17 @@
           btn.classList.add('text-neutral-400');
         }
       });
-
-      if (tabId === 'catalogue') renderCatalog();
-      if (tabId === 'calendrier') renderCalendar();
-      if (tabId === 'dashboard') updateDashboard();
     }
 
-    // GAMIFICATION & CONFETTI
-    function addXP(amount) {
-      userXP += amount;
-      try {
-        confetti({ particleCount: 30, spread: 60, origin: { y: 0.8 }, colors: ['#000000', '#ffffff', '#888888'] });
-      } catch (e) {}
-      updateGamificationUI();
-    }
-
-    function updateGamificationUI() {
-      document.getElementById('user-xp-badge').innerText = `${userXP} XP`;
-      const bar = document.getElementById('egg-xp-bar');
-      const rankTitle = document.getElementById('egg-rank-title');
-      const rankDesc = document.getElementById('egg-rank-desc');
-      const rankIcon = document.getElementById('egg-rank-icon');
-      const headerTag = document.getElementById('user-egg-rank-tag');
-
-      let percent = Math.min(100, (userXP / 200) * 100);
-      bar.style.width = `${percent}%`;
-
-      if (userXP < 50) {
-        rankIcon.innerText = "🥚";
-        rankTitle.innerText = "Niveau 1 : Œuf Curieux";
-        rankDesc.innerText = "Plus que 50 XP pour devenir Poussin Motivé";
-        headerTag.innerText = `🥚 Stade : Œuf Curieux`;
-      } else if (userXP < 120) {
-        rankIcon.innerText = "🐣";
-        rankTitle.innerText = "Niveau 2 : Poussin Motivé";
-        rankDesc.innerText = "Plus que 45 XP pour devenir Poule Entrepreneuse";
-        headerTag.innerText = `🐣 Stade : Poussin Motivé`;
-      } else {
-        rankIcon.innerText = "🐔";
-        rankTitle.innerText = "Niveau 3 : Poule Entrepreneuse";
-        rankDesc.innerText = "Bravo pour ton parcours !";
-        headerTag.innerText = `🐔 Stade : Poule Entrepreneuse`;
-      }
-    }
-
-    function completeDailyMission() {
-      if (!dailyMissionDone) {
-        dailyMissionDone = true;
-        addXP(25);
-        document.getElementById('daily-mission-status').innerText = "✅ Accompli";
-        document.getElementById('daily-mission-status').className = "text-[9px] font-bold text-black";
-        document.getElementById('daily-mission-btn').disabled = true;
-        document.getElementById('daily-mission-btn').innerText = "Mission Accomplie (+25 XP) !";
-        document.getElementById('daily-mission-btn').className = "w-full py-2.5 bg-black text-white rounded-xl font-bold text-xs cursor-default";
-      }
-    }
-
-    // HOME CATEGORIES INIT
-    function initHome() {
-      const container = document.getElementById('home-category-tags');
-      const counts = {};
-      businessDatabase.forEach(b => counts[b.category] = (counts[b.category] || 0) + 1);
-
-      container.innerHTML = Object.keys(counts).slice(0, 4).map(cat => `
-        <div class="p-2.5 rounded-xl border border-neutral-300 bg-neutral-100 hover:bg-white flex items-center space-x-2 cursor-pointer transition shadow-sm" onclick="filterByCategory('${cat}')">
-          <i class="fa-solid fa-layer-group text-[11px] text-black"></i>
-          <div>
-            <p class="font-bold text-black leading-none text-[10px]">${cat}</p>
-            <p class="text-[9px] text-neutral-500 mt-0.5">${counts[cat]} idées</p>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function filterByCategory(cat) {
-      switchTab('catalogue');
-      document.getElementById('catalog-filter-cat').value = cat;
-      filterCatalog();
-    }
-
-    function filterByBudgetZero() {
-      switchTab('catalogue');
-      document.getElementById('catalog-filter-budget').value = "0";
-      filterCatalog();
-    }
-
-    // QUIZ RENDER & SELECTION
-    function startQuiz() {
-      document.getElementById('quiz-intro').classList.add('hidden');
-      document.getElementById('quiz-container').classList.remove('hidden');
-      currentQIndex = 0;
-      renderQuestion();
-    }
-
-    function renderQuestion() {
-      const q = fullQuestions[currentQIndex];
-      document.getElementById('quiz-section-title').innerText = q.section;
-      document.getElementById('quiz-progress-text').innerText = `${currentQIndex + 1} / 30`;
-      document.getElementById('quiz-progress-bar').style.width = `${((currentQIndex + 1) / 30) * 100}%`;
-
-      const encBox = document.getElementById('quiz-encouragement');
-      if (currentQIndex === 14) {
-        encBox.classList.remove('hidden');
-      } else {
-        encBox.classList.add('hidden');
-      }
-
-      document.getElementById('q-number-tag').innerText = `Question ${q.num}`;
-      document.getElementById('q-title').innerText = q.title;
-      document.getElementById('q-subtext').innerText = q.sub;
-
-      const optsContainer = document.getElementById('q-options-container');
-      optsContainer.innerHTML = '';
-
-      const currentAnswer = userAnswers[q.num] || (q.type === 'multi' ? [] : null);
-
-      q.options.forEach(opt => {
-        const isSelected = q.type === 'multi' ? currentAnswer.includes(opt) : currentAnswer === opt;
-        const btn = document.createElement('button');
-        btn.className = `w-full text-left p-3 rounded-xl border text-xs font-semibold flex items-center justify-between transition ${isSelected ? 'border-black bg-black text-white font-extrabold shadow-sm' : 'border-neutral-300 bg-white text-black hover:bg-neutral-100'}`;
-        btn.innerHTML = `
-          <span>${opt}</span>
-          <div class="w-4 h-4 rounded-full border ${isSelected ? 'border-white bg-white/20' : 'border-neutral-400'} flex items-center justify-center shrink-0 ml-2">
-            ${isSelected ? '<i class="fa-solid fa-check text-[9px] text-white"></i>' : ''}
-          </div>
-        `;
-        btn.onclick = () => selectOption(q.num, opt, q.type);
-        optsContainer.appendChild(btn);
-      });
-
-      document.getElementById('q-prev-btn').disabled = currentQIndex === 0;
-    }
-
-    function selectOption(qNum, opt, type) {
-      if (type === 'multi') {
-        let arr = userAnswers[qNum] || [];
-        if (arr.includes(opt)) arr = arr.filter(x => x !== opt);
-        else arr.push(opt);
-        userAnswers[qNum] = arr;
-      } else {
-        userAnswers[qNum] = opt;
-      }
-      renderQuestion();
-    }
-
-    function prevQuestion() {
-      if (currentQIndex > 0) {
-        currentQIndex--;
-        renderQuestion();
-      }
-    }
-
-    function nextQuestion() {
-      if (currentQIndex < fullQuestions.length - 1) {
-        currentQIndex++;
-        renderQuestion();
-      } else {
-        document.getElementById('quiz-container').classList.add('hidden');
-        document.getElementById('quiz-outro').classList.remove('hidden');
-      }
-    }
-
-    // RESULTS COMPUTATION
-    function calculateAndShowResults() {
-      addXP(50);
-      switchTab('resultats');
-      const container = document.getElementById('results-cards-container');
-      const profileSummary = document.getElementById('results-profile-summary');
-
-      const budgetAns = userAnswers[16] || '0 € Strict';
-      const ageAns = userAnswers[1] || 'Non précisé';
-
-      profileSummary.innerHTML = `
-        <p class="font-bold text-black">Synthèse de tes réponses :</p>
-        <p>• Tranche d'âge : <strong>${ageAns}</strong> | Budget initial : <strong>${budgetAns}</strong></p>
-      `;
-
-      const top3 = businessDatabase.slice(0, Math.min(3, businessDatabase.length));
-
-      container.innerHTML = top3.map((b, idx) => `
-        <div class="card-human p-4 space-y-3 border-l-4 border-l-black shadow-sm">
-          <div class="flex justify-between items-start">
-            <span class="text-[9px] font-extrabold px-2 py-0.5 bg-black text-white rounded">Option #${idx + 1}</span>
-            <span class="text-[10px] font-bold text-black bg-neutral-200 px-2 py-0.5 rounded-full border border-neutral-300">${96 - idx * 2}% Adapté</span>
-          </div>
-
-          <div>
-            <h3 class="font-display font-extrabold text-xs text-black">${b.title}</h3>
-            <p class="text-[10px] text-neutral-500 mt-0.5">${b.desc}</p>
-          </div>
-
-          <div class="bg-neutral-100 border border-neutral-300 p-2.5 rounded-xl text-[10px] space-y-1">
-            <p class="font-bold text-black"><i class="fa-solid fa-lightbulb text-black mr-1"></i>Pourquoi cette idée ?</p>
-            <p class="text-neutral-600">${b.matchWhy}</p>
-          </div>
-
-          <div class="pt-1 flex justify-between items-center border-t border-neutral-200">
-            <button onclick="openBizModal(${b.id})" class="text-[10px] font-bold text-black hover:underline">Voir détails</button>
-            <button onclick="selectBizForPlan(${b.id})" class="px-3 py-1.5 bg-black text-white rounded-xl text-[10px] font-bold shadow-sm">
-              Lancer les 30 jours &rarr;
-            </button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // CATALOG RENDER & FILTERS
-    function renderCatalog() {
-      const container = document.getElementById('catalog-grid');
-      const searchVal = document.getElementById('catalog-search').value.toLowerCase();
-      const catVal = document.getElementById('catalog-filter-cat').value;
-      const budgetVal = document.getElementById('catalog-filter-budget').value;
-
-      let filtered = businessDatabase.filter(b => {
-        if (searchVal && !b.title.toLowerCase().includes(searchVal) && !b.desc.toLowerCase().includes(searchVal)) return false;
-        if (catVal !== 'all' && b.category !== catVal) return false;
-        if (budgetVal !== 'all' && b.budget > parseInt(budgetVal)) return false;
-        if (filterSmartphoneOnly && !b.smartphone) return false;
-        if (filterFacileOnly && !b.facile) return false;
-        if (filterFavorisOnly && !favorites.has(b.id)) return false;
-        return true;
-      });
-
-      document.getElementById('catalog-count-badge').innerText = `${filtered.length} / ${businessDatabase.length}`;
-
-      if (filtered.length === 0) {
-        container.innerHTML = `<p class="text-xs text-neutral-400 text-center py-8">Aucun projet ne correspond exactement à ce filtre.</p>`;
-        return;
-      }
-
-      container.innerHTML = filtered.map(b => `
-        <div class="card-human p-3.5 space-y-2 flex flex-col justify-between">
-          <div class="flex justify-between items-start">
-            <span class="text-[9px] font-bold px-2 py-0.5 bg-neutral-100 text-black border border-neutral-300 rounded">${b.tag}</span>
-            <div class="flex items-center space-x-2">
-              <span class="text-[10px] text-neutral-500"><i class="fa-regular fa-clock mr-1"></i>${b.timeReq}</span>
-              <button onclick="toggleFavorite(${b.id})" class="text-xs ${favorites.has(b.id) ? 'text-black' : 'text-neutral-300'}">
-                <i class="fa-solid fa-bookmark"></i>
-              </button>
-            </div>
-          </div>
-          <div>
-            <h3 class="font-display font-bold text-xs text-black">${b.title}</h3>
-            <p class="text-[10px] text-neutral-500 mt-0.5 line-clamp-2">${b.desc}</p>
-          </div>
-          <div class="pt-2 flex justify-between items-center border-t border-neutral-200 text-[10px]">
-            <span class="font-extrabold text-black">
-              Budget : ${b.budget === 0 ? '0 €' : b.budget + ' €'}
-            </span>
-            <button onclick="openBizModal(${b.id})" class="font-bold text-black underline">Aperçu</button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function filterCatalog() { renderCatalog(); }
-
-    function toggleFilterBadge(type) {
-      if (type === 'smartphone') {
-        filterSmartphoneOnly = !filterSmartphoneOnly;
-        document.getElementById('btn-filter-smartphone').classList.toggle('bg-black');
-        document.getElementById('btn-filter-smartphone').classList.toggle('text-white');
-      }
-      if (type === 'facile') {
-        filterFacileOnly = !filterFacileOnly;
-        document.getElementById('btn-filter-facile').classList.toggle('bg-black');
-        document.getElementById('btn-filter-facile').classList.toggle('text-white');
-      }
-      if (type === 'favoris') {
-        filterFavorisOnly = !filterFavorisOnly;
-        document.getElementById('btn-filter-favoris').classList.toggle('bg-black');
-        document.getElementById('btn-filter-favoris').classList.toggle('text-white');
-      }
-      renderCatalog();
-    }
-
-    function toggleFavorite(id) {
-      if (favorites.has(id)) favorites.delete(id);
-      else favorites.add(id);
-      document.getElementById('fav-count').innerText = favorites.size;
-      renderCatalog();
-    }
-
-    // MODAL DETAILS
-    function openBizModal(id) {
-      const b = businessDatabase.find(x => x.id === id);
-      if (!b) return;
-      const content = document.getElementById('modal-content');
-      content.innerHTML = `
-        <span class="text-[9px] font-bold px-2 py-0.5 bg-black text-white rounded uppercase">${b.category}</span>
-        <h2 class="font-display text-base font-extrabold text-black">${b.title}</h2>
-        <p class="text-xs text-neutral-600 leading-relaxed">${b.desc}</p>
-
-        <div class="bg-neutral-100 p-3 rounded-xl border border-neutral-300 text-xs space-y-1.5">
-          <p><strong>Temps estimé :</strong> ${b.timeReq}</p>
-          <p><strong>Budget matériel :</strong> ${b.budget === 0 ? '0 € (Matériel existant)' : b.budget + ' €'}</p>
-          <p><strong>Niveau de départ :</strong> ${b.facile ? 'Inaccessible sans expérience' : 'Prise en main rapide'}</p>
-        </div>
-
-        <button onclick="selectBizForPlan(${b.id}); closeBizModal();" class="w-full py-2.5 bg-black text-white font-bold rounded-xl text-xs shadow">
-          Sélectionner pour mon plan 30 jours
-        </button>
-      `;
-      document.getElementById('biz-modal').classList.remove('hidden');
-    }
-
-    function closeBizModal() { document.getElementById('biz-modal').classList.add('hidden'); }
-
-    // CALENDAR ROADMAP
-    function selectBizForPlan(id) {
-      selectedBizForPlan = businessDatabase.find(x => x.id === id);
-      switchTab('calendrier');
-    }
-
-    function renderCalendar() {
-      document.getElementById('calendar-active-biz-name').innerText = selectedBizForPlan.title;
-      const container = document.getElementById('calendar-days-container');
-
-      const missions = selectedBizForPlan.days;
-      let html = '';
-
-      missions.forEach((m) => {
-        const isChecked = checkedDays.has(m.d);
-        html += `
-          <div class="card-human p-3.5 flex items-start space-x-3 bg-white">
-            <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleDayCheck(${m.d})" class="mt-1 w-4 h-4 rounded border-neutral-400 text-black focus:ring-0 cursor-pointer">
-            <div class="flex-1 space-y-0.5">
-              <div class="flex justify-between items-center">
-                <span class="text-[9px] font-extrabold px-2 py-0.5 bg-black text-white rounded">Étape ${m.d}</span>
-                <span class="text-[9px] font-bold text-black bg-neutral-100 px-1.5 py-0.5 rounded border border-neutral-300">
-                  ${m.tool}
-                </span>
-              </div>
-              <h4 class="font-display text-xs font-bold text-black ${isChecked ? 'line-through text-neutral-400' : ''}">${m.title}</h4>
-              <p class="text-[10px] text-neutral-500">${m.desc}</p>
-            </div>
-          </div>
-        `;
-      });
-
-      container.innerHTML = html;
-      updateCalendarProgress();
-    }
-
-    function toggleDayCheck(day) {
-      if (checkedDays.has(day)) {
-        checkedDays.delete(day);
-      } else {
-        checkedDays.add(day);
-        addXP(10);
-      }
-      updateCalendarProgress();
-      renderCalendar();
-    }
-
-    function updateCalendarProgress() {
-      const percent = Math.round((checkedDays.size / 7) * 100);
-      document.getElementById('calendar-progress-percent').innerText = `${percent}%`;
-    }
-
-    // SIMULATOR
+    // Calculateur simple pour l'onglet simulateur
     function calculateSimulatedEarnings() {
       const price = parseFloat(document.getElementById('sim-unit-price').value) || 0;
       const volume = parseFloat(document.getElementById('sim-volume').value) || 0;
-      const status = document.getElementById('sim-status').value;
-
-      const gross = price * volume;
-      let taxRate = 0;
-
-      if (status === 'micro-presta') taxRate = 0.212;
-      else if (status === 'micro-vente') taxRate = 0.123;
-
-      const taxes = gross * taxRate;
-      const net = gross - taxes;
-
-      document.getElementById('sim-gross-val').innerText = `${gross.toFixed(0)} € / mois`;
-      document.getElementById('sim-taxes-val').innerText = `- ${taxes.toFixed(0)} €`;
+      const net = price * volume * 0.787; // Estimation nette après charges
       document.getElementById('sim-net-val').innerText = `${net.toFixed(0)} € / mois`;
     }
 
-    // CRM & DASHBOARD
-    function updateDashboard() {
-      document.getElementById('dash-selected-biz').innerText = selectedBizForPlan ? selectedBizForPlan.title : 'Aucun';
-      document.getElementById('dash-completed-tasks').innerText = `${checkedDays.size} / 7 étapes`;
-    }
-
-    function addNewProspectPrompt() {
-      const name = prompt("Prénom ou nom du contact :");
-      if (name) {
-        const container = document.getElementById('prospects-list-container');
-        if (container.innerText.includes('Aucun contact')) container.innerHTML = '';
-        container.innerHTML += `
-          <div class="p-2.5 rounded-xl bg-neutral-100 border border-neutral-300 flex justify-between items-center">
-            <span class="font-bold text-black">${name}</span>
-            <span class="text-[9px] bg-black text-white font-bold px-2 py-0.5 rounded-md">À recontacte</span>
-          </div>
-        `;
-      }
-    }
-
-    function addRealRevenue() {
-      const val = parseFloat(document.getElementById('real-revenue-input').value);
-      if (val && !isNaN(val)) {
-        realRevenues.push(val);
-        const total = realRevenues.reduce((a, b) => a + b, 0);
-        document.getElementById('total-revenue-display').innerText = `${total} €`;
-        document.getElementById('real-revenue-input').value = '';
-        addXP(30);
-      }
-    }
-
-    // SHARE MODAL
-    function openProfileCardModal() {
-      document.getElementById('story-card-top1').innerText = selectedBizForPlan.title;
-      document.getElementById('profile-card-modal').classList.remove('hidden');
-    }
-
-    function closeProfileCardModal() { document.getElementById('profile-card-modal').classList.add('hidden'); }
-
-    function copyStoryCardText() {
-      const txt = `🔍 Mon projet findmybusiness.com : ${selectedBizForPlan.title}\n🎯 Objectif : Réaliser mon 1er service concret en 30 jours !`;
-      navigator.clipboard.writeText(txt);
-      alert("Texte copié ! Tu peux le partager à tes proches ou en story.");
-    }
-
-    // HELP MODALS
-    function openTruthTestModal() { document.getElementById('truth-test-modal').classList.remove('hidden'); }
-    function closeTruthTestModal() { document.getElementById('truth-test-modal').classList.add('hidden'); }
-
-    function openBlockedHelpModal() { document.getElementById('blocked-help-modal').classList.remove('hidden'); }
-    function closeBlockedHelpModal() { document.getElementById('blocked-help-modal').classList.add('hidden'); }
-
-    function showQuickTip(msg) {
-      alert(msg);
-    }
-
-    // INIT
     window.onload = () => {
-      initHome();
-      renderCatalog();
       calculateSimulatedEarnings();
     };
   </script>
